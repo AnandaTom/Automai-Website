@@ -20,7 +20,7 @@ const CONTENT: Record<Language, Content> = {
     },
     hero: {
       title: "Automatisez votre business. Récupérez votre temps.",
-      subtitle: "Je construis des systèmes d'automatisation IA sur-mesure qui éliminent vos tâches répétitives, réduisent vos erreurs et font grandir votre chiffre d'affaires — pendant que vous vous concentrez sur ce qui compte vraiment.",
+      subtitle: "Je construis des systèmes d'automatisation IA sur-mesure qui éliminent vos tâches répétitives, réduisent vos erreurs et font grandir votre chiffre d'affaires pendant que vous vous concentrez sur ce qui compte vraiment.",
       cta: "Réserver mon appel découverte gratuit"
     },
     socialProof: {
@@ -35,6 +35,12 @@ const CONTENT: Record<Language, Content> = {
         growthLabel: "croissance en 3 mois"
       },
       testimonials: [
+        {
+          stars: 5,
+          project: "AI & Automation Specialist – Long-term Exclusive Partner for Bali Projects",
+          quote: "Tom n’est pas seulement un excellent freelance : c’est un game-changer. Dès le premier jour, il a apporté une clarté, une vision et une maîtrise technique que je n’avais encore jamais vues sur Upwork. Chaque échange avec lui fait avancer le projet dix fois plus vite, et chaque livrable dépasse ce que j’attendais. Tom combine intelligence stratégique, précision d’exécution et une capacité rare à transformer des idées en résultats concrets. C’est simple : si vous cherchez quelqu’un de fiable, brillant, proactif et réellement investi dans votre succès, Tom est le meilleur choix.",
+          date: "Dec 2025"
+        },
         {
           stars: 5,
           project: "Make Automation Expert Needed for Existing Projects",
@@ -159,7 +165,7 @@ const CONTENT: Record<Language, Content> = {
     },
     hero: {
       title: "Automate your business. Reclaim your time.",
-      subtitle: "I build custom AI automation systems that eliminate repetitive tasks, reduce errors, and grow your revenue — while you focus on what truly matters.",
+      subtitle: "I build custom AI automation systems that eliminate repetitive tasks, reduce errors, and grow your revenue while you focus on what truly matters.",
       cta: "Book my free discovery call"
     },
     socialProof: {
@@ -174,6 +180,12 @@ const CONTENT: Record<Language, Content> = {
         growthLabel: "growth in 3 months"
       },
       testimonials: [
+        {
+          stars: 5,
+          project: "AI & Automation Specialist – Long-term Exclusive Partner for Bali Projects",
+          quote: "Tom is not just an excellent freelancer: he is a game-changer. From day one, he brought clarity, vision, and technical mastery that I had never seen on Upwork before. Every interaction with him moves the project forward ten times faster. Tom combines strategic intelligence, execution precision, and a rare ability to transform ideas into concrete results. It's simple: if you're looking for someone reliable, brilliant, proactive, and truly invested in your success, Tom is the best choice you can make.",
+          date: "Dec 2025"
+        },
         {
           stars: 5,
           project: "Make Automation Expert Needed for Existing Projects",
