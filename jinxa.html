@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jinxa — Digital Transformation & Workflow Automation. 10+ years turning messy data into real results.">
+  <title>Jinxa — Digital Transformation & Workflow Automation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========== CSS VARIABLES ========== */
+    :root {
+      --bg-primary:       #0a0b0d;
+      --bg-card:          #111318;
+      --bg-card-hover:    #181d24;
+      --accent-primary:   #34d399;
+      --accent-secondary: #10b981;
+      --accent-glow:      rgba(52, 211, 153, 0.15);
+      --text-primary:     #f0f0f5;
+      --text-secondary:   #8a8a9a;
+      --text-muted:       #5a5a6a;
+      --border:           rgba(255,255,255,0.05);
+    }
+
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Inter Tight', sans-serif;
+      line-height: 1.2;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ========== UTILITIES ========== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 16px 0;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(10, 11, 13, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--bg-primary);
+      background: var(--accent-primary);
+      padding: 10px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(52, 211, 153, 0.3);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      background: transparent;
+      padding: 10px 24px;
+      border-radius: 8px;
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(52, 211, 153, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(52, 211, 153, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      padding: 8px 20px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 32px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .hero-stat-number {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+
+    .hero-stat-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Parallax elements */
+    .parallax-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .p-el {
+      position: absolute;
+    }
+
+    /* Wireframe cube */
+    .p-cube {
+      top: 15%;
+      right: 12%;
+      width: 80px;
+      height: 80px;
+      border: 1px solid rgba(52, 211, 153, 0.15);
+      transform: rotate(45deg) rotateX(15deg);
+      animation: floatSlow 8s ease-in-out infinite;
+      opacity: 0.2;
+    }
+
+    .p-cube::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      right: -15px;
+      bottom: -15px;
+      border: 1px solid rgba(52, 211, 153, 0.08);
+      transform: rotate(12deg);
+    }
+
+    /* Data node */
+    .p-node {
+      top: 25%;
+      right: 30%;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      opacity: 0.2;
+      animation: floatMedium 6s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
+    }
+
+    .p-node::before,
+    .p-node::after {
+      content: '';
+      position: absolute;
+      background: rgba(52, 211, 153, 0.1);
+    }
+
+    .p-node::before {
+      top: 50%;
+      left: 100%;
+      width: 60px;
+      height: 1px;
+    }
+
+    .p-node::after {
+      top: 100%;
+      left: 50%;
+      width: 1px;
+      height: 40px;
+    }
+
+    /* Sphere */
+    .p-sphere {
+      top: 40%;
+      right: 20%;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(52, 211, 153, 0.18), transparent 70%);
+      border: 1px solid rgba(52, 211, 153, 0.1);
+      animation: floatMedium 7s ease-in-out infinite;
+      opacity: 0.25;
+    }
+
+    /* Dashboard widget */
+    .p-widget {
+      top: 55%;
+      right: 8%;
+      width: 100px;
+      height: 60px;
+      border: 1px solid rgba(52, 211, 153, 0.1);
+      border-radius: 6px;
+      opacity: 0.15;
+      animation: floatSlow 10s ease-in-out infinite reverse;
+    }
+
+    .p-widget::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      height: 2px;
+      background: rgba(52, 211, 153, 0.2);
+      border-radius: 1px;
+    }
+
+    .p-widget::after {
+      content: '';
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      width: 40%;
+      height: 20px;
+      border: 1px solid rgba(52, 211, 153, 0.1);
+      border-radius: 3px;
+    }
+
+    /* Ring */
+    .p-ring {
+      bottom: 30%;
+      right: 35%;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 1px solid rgba(52, 211, 153, 0.1);
+      animation: floatSlow 12s ease-in-out infinite;
+      opacity: 0.15;
+    }
+
+    .p-ring::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(52, 211, 153, 0.08);
+    }
+
+    /* Small dots */
+    .p-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      opacity: 0.2;
+    }
+
+    .p-dot-1 { top: 20%; right: 45%; animation: floatMedium 5s ease-in-out infinite; }
+    .p-dot-2 { top: 65%; right: 15%; animation: floatSlow 7s ease-in-out infinite 1s; }
+    .p-dot-3 { top: 45%; right: 42%; animation: floatMedium 9s ease-in-out infinite 2s; }
+
+    /* Grid element */
+    .p-grid {
+      bottom: 20%;
+      right: 25%;
+      width: 60px;
+      height: 60px;
+      opacity: 0.12;
+      animation: floatMedium 8s ease-in-out infinite 3s;
+      background-image:
+        linear-gradient(rgba(52, 211, 153, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(52, 211, 153, 0.3) 1px, transparent 1px);
+      background-size: 15px 15px;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes floatMedium {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* ========== TOOLS BANNER (Marquee) ========== */
+    .tools-banner {
+      padding: 80px 0 60px;
+    }
+
+    .tools-banner-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .tools-banner-header p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    .marquee-wrapper {
+      overflow: hidden;
+      position: relative;
+      padding: 24px 0;
+    }
+
+    .marquee-wrapper::before,
+    .marquee-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .marquee-wrapper::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--bg-primary), transparent);
+    }
+
+    .marquee-wrapper::after {
+      right: 0;
+      background: linear-gradient(270deg, var(--bg-primary), transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: marquee 35s linear infinite;
+    }
+
+    .marquee-wrapper:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    .marquee-item {
+      flex-shrink: 0;
+      padding: 14px 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .marquee-item:hover {
+      color: var(--text-primary);
+      border-color: rgba(52, 211, 153, 0.2);
+    }
+
+    .marquee-item svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ========== CASE STUDIES ========== */
+    .cases {
+      padding: 100px 0;
+    }
+
+    .cases-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .cases-header .section-subtitle {
+      margin: 0 auto;
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .case-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .case-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(52, 211, 153, 0.2);
+      box-shadow: 0 16px 40px var(--accent-glow);
+    }
+
+    .case-client {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .case-section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .case-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .case-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .case-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.15);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .case-numbers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .case-number {
+      text-align: center;
+    }
+
+    .case-number-value {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 4px;
+    }
+
+    .case-number-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== HOW IT WORKS ========== */
+    .how-it-works {
+      padding: 100px 0;
+    }
+
+    .how-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent-primary), rgba(52, 211, 153, 0.2));
+    }
+
+    .timeline-step {
+      position: relative;
+      padding-left: 80px;
+      padding-bottom: 64px;
+    }
+
+    .timeline-step:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-icon {
+      position: absolute;
+      left: 8px;
+      top: 0;
+      width: 42px;
+      height: 42px;
+      background: var(--bg-primary);
+      border: 2px solid var(--accent-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      z-index: 1;
+    }
+
+    .timeline-step-number {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .timeline-step h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .timeline-step p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .timeline-pill {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--bg-primary);
+      background: var(--accent-primary);
+      padding: 6px 16px;
+      border-radius: 100px;
+    }
+
+    /* ========== SERVICES ========== */
+    .services {
+      padding: 100px 0;
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(52, 211, 153, 0.2);
+      box-shadow: 0 16px 40px var(--accent-glow);
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      background: rgba(52, 211, 153, 0.06);
+      border-radius: 12px;
+    }
+
+    .service-title {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .service-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ========== CTA SECTION ========== */
+    .cta {
+      padding: 120px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 64px 48px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta h2 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .cta .btn-primary {
+      font-size: 1rem;
+      padding: 16px 36px;
+      box-shadow: 0 0 40px rgba(52, 211, 153, 0.2);
+    }
+
+    .cta .btn-primary:hover {
+      box-shadow: 0 0 60px rgba(52, 211, 153, 0.35);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer-email {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+
+    .footer-email:hover {
+      color: var(--accent-primary);
+    }
+
+    .footer-linkedin {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+
+    .footer-linkedin:hover {
+      color: var(--accent-primary);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .cases-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .p-cube, .p-ring, .p-widget {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 64px 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      /* Mobile menu */
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10, 11, 13, 0.95);
+        backdrop-filter: blur(12px);
+        padding: 24px;
+        gap: 20px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 120px 0 60px;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-stats {
+        gap: 20px;
+      }
+
+      .hero-stat-number {
+        font-size: 1.2rem;
+      }
+
+      .cases-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-numbers {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .case-number-value {
+        font-size: 1.1rem;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-step {
+        padding-left: 64px;
+      }
+
+      .timeline-icon {
+        left: 0;
+        width: 40px;
+        height: 40px;
+      }
+
+      .cta-content {
+        padding: 40px 24px;
+      }
+
+      .footer .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-left, .footer-right {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="logo" id="logo-link">JINXA</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#case-studies">Case Studies</a></li>
+        <li><a href="#how-it-works">How it Works</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <a href="https://calendly.com/jinxa/one-on-one" target="_blank" rel="noopener" class="btn-primary">Book a Call</a>
+        </li>
+      </ul>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="hero">
+      <div class="parallax-elements" id="parallax">
+        <div class="p-el p-cube" data-speed="0.03"></div>
+        <div class="p-el p-node" data-speed="0.05"></div>
+        <div class="p-el p-sphere" data-speed="0.04"></div>
+        <div class="p-el p-widget" data-speed="0.02"></div>
+        <div class="p-el p-ring" data-speed="0.03"></div>
+        <div class="p-el p-dot p-dot-1" data-speed="0.06"></div>
+        <div class="p-el p-dot p-dot-2" data-speed="0.04"></div>
+        <div class="p-el p-dot p-dot-3" data-speed="0.07"></div>
+        <div class="p-el p-grid" data-speed="0.04"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content reveal">
+          <div class="hero-badge">Digital Transformation & Workflow Automation</div>
+          <h1>The definitive digital growth partner for fast-moving B2B companies.</h1>
+          <p class="hero-sub">10+ years turning messy data into real results. I build growth strategies, streamline customer journeys, and set up automations that let your team breathe easier.</p>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-number" data-target="42" data-suffix="+">0</span>
+              <span class="hero-stat-label">clients</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-number" data-target="65" data-suffix="+">0</span>
+              <span class="hero-stat-label">projects</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-number" data-target="10" data-suffix="+">0</span>
+              <span class="hero-stat-label">years experience</span>
+            </div>
+          </div>
+          <div class="hero-ctas">
+            <a href="https://calendly.com/jinxa/one-on-one" target="_blank" rel="noopener" class="btn-primary">
+              Book a Free Strategy Call
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#how-it-works" class="btn-secondary">
+              See How It Works
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TOOLS BANNER (Marquee) ========== -->
+    <section class="tools-banner" id="tools">
+      <div class="container">
+        <div class="tools-banner-header reveal">
+          <p>Tools I work with to deliver results</p>
+        </div>
+      </div>
+      <div class="marquee-wrapper">
+        <div class="marquee-track">
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Make
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            HubSpot
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Salesforce
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M9 3v18M3 9h18" stroke="currentColor" stroke-width="1.5"/></svg>
+            Notion
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Zapier
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>
+            Airtable
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 12a2 2 0 000 4h4v-4h-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Google Analytics
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Mailchimp
+          </div>
+          <!-- Duplicate for seamless loop -->
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Make
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            HubSpot
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Salesforce
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M9 3v18M3 9h18" stroke="currentColor" stroke-width="1.5"/></svg>
+            Notion
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Zapier
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>
+            Airtable
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 12a2 2 0 000 4h4v-4h-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Google Analytics
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Mailchimp
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CASE STUDIES ========== -->
+    <section class="cases section" id="case-studies">
+      <div class="container">
+        <div class="cases-header reveal">
+          <div class="section-label">Results</div>
+          <h2 class="section-title">Proven Results Across Industries</h2>
+        </div>
+
+        <div class="cases-grid">
+          <!-- Case Study 1 — Guide Michelin -->
+          <div class="case-card reveal">
+            <div class="case-client">Guide Michelin</div>
+            <div class="case-section-label">Challenge</div>
+            <p class="case-text">Streamline internal processes & eliminate inefficiencies across teams.</p>
+            <div class="case-section-label">Solution</div>
+            <p class="case-text">Implemented martech stack automation using Make + HubSpot to eliminate manual handoffs.</p>
+            <div class="case-badges">
+              <span class="case-badge">30% faster workflows</span>
+              <span class="case-badge">Zero manual handoffs</span>
+              <span class="case-badge">3 months to full implementation</span>
+            </div>
+            <div class="case-numbers">
+              <div class="case-number">
+                <div class="case-number-value case-counter" data-target="30" data-suffix="%">0</div>
+                <div class="case-number-label">Faster</div>
+              </div>
+              <div class="case-number">
+                <div class="case-number-value">0</div>
+                <div class="case-number-label">Manual handoffs</div>
+              </div>
+              <div class="case-number">
+                <div class="case-number-value">3mo</div>
+                <div class="case-number-label">To deploy</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Study 2 — Autorigin -->
+          <div class="case-card reveal">
+            <div class="case-client">Autorigin</div>
+            <div class="case-section-label">Challenge</div>
+            <p class="case-text">Align sales and marketing for stronger acquisition in the automotive space.</p>
+            <div class="case-section-label">Solution</div>
+            <p class="case-text">CRM implementation + data management system with real-time dashboards.</p>
+            <div class="case-badges">
+              <span class="case-badge">2x lead conversion</span>
+              <span class="case-badge">Sales & marketing aligned</span>
+              <span class="case-badge">Real-time dashboards</span>
+            </div>
+            <div class="case-numbers">
+              <div class="case-number">
+                <div class="case-number-value case-counter" data-target="2" data-suffix="x">0</div>
+                <div class="case-number-label">Lead conversion</div>
+              </div>
+              <div class="case-number">
+                <div class="case-number-value case-counter" data-target="100" data-suffix="%">0</div>
+                <div class="case-number-label">Aligned</div>
+              </div>
+              <div class="case-number">
+                <div class="case-number-value">Real-time</div>
+                <div class="case-number-label">Dashboards</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Study 3 — LockData -->
+          <div class="case-card reveal">
+            <div class="case-client">LockData</div>
+            <div class="case-section-label">Challenge</div>
+            <p class="case-text">Build scalable systems and improve performance tracking for data security.</p>
+            <div class="case-section-label">Solution</div>
+            <p class="case-text">Marketing automation workflows + analytics dashboards for full visibility.</p>
+            <div class="case-badges">
+              <span class="case-badge">50% time saved</span>
+              <span class="case-badge">Full visibility</span>
+              <span class="case-badge">Scalable operations</span>
+            </div>
+            <div class="case-numbers">
+              <div class="case-number">
+                <div class="case-number-value case-counter" data-target="50" data-suffix="%">0</div>
+                <div class="case-number-label">Time saved</div>
+              </div>
+              <div class="case-number">
+                <div class="case-number-value">360&deg;</div>
+                <div class="case-number-label">Visibility</div>
+              </div>
+              <div class="case-number">
+                <div class="case-number-value">Scalable</div>
+                <div class="case-number-label">Operations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== HOW IT WORKS ========== -->
+    <section class="how-it-works section" id="how-it-works">
+      <div class="container">
+        <div class="how-header reveal">
+          <div class="section-label">Process</div>
+          <h2 class="section-title">How I Help You Grow</h2>
+        </div>
+
+        <div class="timeline">
+          <!-- Step 1 -->
+          <div class="timeline-step reveal">
+            <div class="timeline-icon">&#128222;</div>
+            <div class="timeline-step-number">Step 1</div>
+            <h3>Discovery & Diagnosis</h3>
+            <p>We start with a free 30-minute call. I listen to your challenges, map your current workflows, and identify where automation and data can create the biggest impact.</p>
+            <span class="timeline-pill">Free. No commitment.</span>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="timeline-step reveal">
+            <div class="timeline-icon">&#128203;</div>
+            <div class="timeline-step-number">Step 2</div>
+            <h3>Actionable Roadmap</h3>
+            <p>I build a data-driven strategy tailored to your goals. You get a clear roadmap with priorities, timelines, and expected outcomes before we start implementation.</p>
+            <span class="timeline-pill">Full transparency.</span>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="timeline-step reveal">
+            <div class="timeline-icon">&#128640;</div>
+            <div class="timeline-step-number">Step 3</div>
+            <h3>Build, Test, Launch</h3>
+            <p>I implement the systems, integrate your tools, and coach your team on how to use them. You get ongoing support to ensure everything scales as you grow.</p>
+            <span class="timeline-pill">Done in 4-8 weeks.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SERVICES ========== -->
+    <section class="services section" id="services">
+      <div class="container">
+        <div class="services-header reveal">
+          <div class="section-label">Services</div>
+          <h2 class="section-title">What I Do Best</h2>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <div class="service-icon">&#128200;</div>
+            <h3 class="service-title">Growth Strategy</h3>
+            <p class="service-desc">Build actionable, data-driven roadmaps aligned with your business goals. Get new customers, keep them happy, and optimize every channel.</p>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">&#9881;&#65039;</div>
+            <h3 class="service-title">Workflow Automation</h3>
+            <p class="service-desc">Design smart systems using Make, Zapier, and custom APIs. Reduce friction, save time, and increase output without adding headcount.</p>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">&#128451;&#65039;</div>
+            <h3 class="service-title">CRM Implementation</h3>
+            <p class="service-desc">Set up and optimize HubSpot, Salesforce, Notion, and other tools. Make sure they talk to each other and actually use the data.</p>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">&#128202;</div>
+            <h3 class="service-title">Analytics & Dashboards</h3>
+            <p class="service-desc">Build dashboards that cut through the noise. Track what actually matters, and tweak until it works.</p>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">&#127919;</div>
+            <h3 class="service-title">Performance Marketing</h3>
+            <p class="service-desc">Plan and execute campaigns across SEO, SEA, CRM, inbound, and automation. Mix channels that deliver measurable ROI.</p>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">&#129309;</div>
+            <h3 class="service-title">Digital Adoption</h3>
+            <p class="service-desc">Roll out new tools and workflows. Coach your teams on how to use data without frying their brains.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CTA FINAL ========== -->
+    <section class="cta section" id="contact">
+      <div class="container">
+        <div class="cta-content reveal">
+          <h2>Ready to transform your operations?</h2>
+          <p>Book a free 30-minute strategy call. No sales pitch&mdash;just a real conversation about where automation and data can unlock growth for your business.</p>
+          <a href="https://calendly.com/jinxa/one-on-one" target="_blank" rel="noopener" class="btn-primary">
+            Book Your Free Call
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-left">
+        <a href="#" class="logo" id="footer-logo">JINXA</a>
+        <ul class="footer-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#case-studies">Case Studies</a></li>
+          <li><a href="#how-it-works">How it Works</a></li>
+        </ul>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:hello@jinxa.fr" class="footer-email">hello@jinxa.fr</a>
+        <a href="https://www.linkedin.com/in/leslie-guilbert-digital-marketing-strategy/" target="_blank" rel="noopener" class="footer-linkedin">LinkedIn</a>
+        <span class="footer-copy">&copy; 2025 Jinxa. Built with clarity and no BS.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      // --- Navbar scroll ---
+      var navbar = document.getElementById('navbar');
+
+      function onScroll() {
+        var y = window.scrollY || window.pageYOffset;
+        if (y > 40) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // --- Mobile menu ---
+      var menuToggle = document.getElementById('menu-toggle');
+      var navLinks = document.getElementById('nav-links');
+
+      menuToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('open');
+      });
+
+      navLinks.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          navLinks.classList.remove('open');
+        });
+      });
+
+      // --- Logo scroll to top ---
+      document.getElementById('logo-link').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      document.getElementById('footer-logo').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // --- Scroll reveal with stagger ---
+      var revealElements = document.querySelectorAll('.reveal');
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var parent = el.closest('.cases-grid, .services-grid, .timeline');
+            if (parent) {
+              var siblings = Array.from(parent.querySelectorAll('.reveal'));
+              var idx = siblings.indexOf(el);
+              el.style.transitionDelay = (idx * 120) + 'ms';
+            }
+            el.classList.add('visible');
+            revealObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      revealElements.forEach(function (el) {
+        revealObserver.observe(el);
+      });
+
+      // --- Counter animation ---
+      function animateCounter(el) {
+        var target = parseFloat(el.getAttribute('data-target'));
+        var prefix = el.getAttribute('data-prefix') || '';
+        var suffix = el.getAttribute('data-suffix') || '';
+        var duration = 1500;
+        var start = performance.now();
+
+        function step(now) {
+          var elapsed = now - start;
+          var progress = Math.min(elapsed / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = Math.round(eased * target);
+          el.textContent = prefix + current + suffix;
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      var counters = document.querySelectorAll('.hero-stat-number, .case-counter');
+      var counterObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      counters.forEach(function (c) {
+        counterObserver.observe(c);
+      });
+
+      // --- Parallax ---
+      var parallaxContainer = document.getElementById('parallax');
+      var parallaxElements = parallaxContainer ? parallaxContainer.querySelectorAll('.p-el') : [];
+      var ticking = false;
+
+      function updateParallax() {
+        var scrollY = window.scrollY || window.pageYOffset;
+        parallaxElements.forEach(function (el) {
+          var speed = parseFloat(el.getAttribute('data-speed')) || 0.03;
+          var yOffset = scrollY * speed * -60;
+          el.style.transform = 'translateY(' + yOffset + 'px)';
+        });
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      // --- Smooth scroll for anchor links ---
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          var href = this.getAttribute('href');
+          if (href === '#') return;
+          var target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            var offset = navbar.offsetHeight + 16;
+            var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
