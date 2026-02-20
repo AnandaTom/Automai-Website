@@ -149,14 +149,14 @@
       list-style: none;
     }
 
-    .nav-links a {
+    .nav-links a:not(.btn-primary) {
       font-size: 0.9rem;
       font-weight: 500;
       color: var(--text-secondary);
       transition: color 0.2s;
     }
 
-    .nav-links a:hover {
+    .nav-links a:not(.btn-primary):hover {
       color: var(--text-primary);
     }
 
@@ -981,15 +981,25 @@
 
     /* ========== HERO TESTIMONIAL ========== */
     .hero-testimonial {
-      margin-top: 28px;
+      margin: 40px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+      background: rgba(52, 211, 153, 0.07);
+      border: 1px solid rgba(52, 211, 153, 0.22);
+      border-radius: 16px;
+      padding: 28px 36px;
+      max-width: 580px;
+      box-shadow: 0 0 40px rgba(52, 211, 153, 0.06);
+    }
+
+    .hero-testimonial-footer {
       display: flex;
       align-items: center;
-      gap: 14px;
-      background: rgba(52, 211, 153, 0.04);
-      border: 1px solid rgba(52, 211, 153, 0.12);
-      border-radius: 12px;
-      padding: 14px 20px;
-      max-width: 540px;
+      justify-content: center;
+      gap: 10px;
     }
 
     .hero-testimonial-avatar {
@@ -997,8 +1007,8 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: rgba(52, 211, 153, 0.12);
-      border: 1px solid rgba(52, 211, 153, 0.3);
+      background: rgba(52, 211, 153, 0.15);
+      border: 1px solid rgba(52, 211, 153, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1008,20 +1018,19 @@
       color: var(--accent-primary);
     }
 
-    .hero-testimonial-body { flex: 1; }
-
     .hero-testimonial-quote {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
+      font-size: 1rem;
+      color: var(--text-primary);
+      line-height: 1.65;
       font-style: italic;
-      margin-bottom: 4px;
+      margin: 0;
     }
 
     .hero-testimonial-attr {
-      font-size: 0.72rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
       font-weight: 600;
+      white-space: nowrap;
     }
 
     /* ========== HERO TICKER ========== */
@@ -1436,22 +1445,26 @@
     }
 
     /* ========== ABOUT ========== */
-    .about-inner {
-      max-width: 720px;
+    .about-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 56px;
+      align-items: start;
       margin-bottom: 56px;
     }
 
     .about-title { margin-bottom: 20px; line-height: 1.25; }
 
-    .about-photo-wrap { margin: 28px 0 32px; }
+    .about-photo-wrap { flex-shrink: 0; }
 
     .about-photo-wrap img {
-      width: 220px;
-      height: 220px;
+      width: 260px;
+      height: 320px;
       object-fit: cover;
       border-radius: 16px;
       border: 1px solid rgba(52, 211, 153, 0.18);
-      box-shadow: 0 8px 40px rgba(52, 211, 153, 0.08);
+      box-shadow: 0 12px 50px rgba(52, 211, 153, 0.1);
+      display: block;
     }
 
     .about-text {
@@ -1521,6 +1534,9 @@
     }
 
     @media (max-width: 768px) {
+      .about-top { grid-template-columns: 1fr; }
+      .about-photo-wrap { order: -1; }
+      .about-photo-wrap img { width: 160px; height: 200px; }
       .about-segments { grid-template-columns: 1fr; }
     }
   </style>
@@ -1593,10 +1609,10 @@
             </a>
           </div>
           <div class="hero-testimonial">
-            <div class="hero-testimonial-avatar">AB</div>
-            <div class="hero-testimonial-body">
-              <p class="hero-testimonial-quote" data-i18n="hero.testimonial_quote">"Leslie a transformé notre CRM et toute notre gestion de données. Ce qui prenait des semaines à nos équipes tourne maintenant automatiquement."</p>
-              <span class="hero-testimonial-attr" data-i18n="hero.testimonial_attr">Antoine Bermejo — Directeur Marketing, Autorigin</span>
+            <p class="hero-testimonial-quote" data-i18n="hero.testimonial_quote">"Leslie a transformé notre CRM et toute notre gestion de données. Ce qui prenait des semaines à nos équipes tourne maintenant automatiquement."</p>
+            <div class="hero-testimonial-footer">
+              <div class="hero-testimonial-avatar">AB</div>
+              <span class="hero-testimonial-attr" data-i18n="hero.testimonial_attr">Antoine Bermejo · Directeur Marketing, Autorigin</span>
             </div>
           </div>
         </div>
@@ -1753,20 +1769,22 @@
     <!-- ========== ABOUT ========== -->
     <section class="section" id="about">
       <div class="container">
-        <div class="about-inner reveal">
-          <div class="section-label" data-i18n="about.label">À propos</div>
-          <h2 class="section-title about-title" data-i18n-html="about.title">Leslie Guilbert —<br>Consultante en transformation digitale</h2>
-          <div class="about-photo-wrap">
-            <img src="image.png" alt="Leslie Guilbert" width="220" height="220">
+        <div class="about-top reveal">
+          <div class="about-text-col">
+            <div class="section-label" data-i18n="about.label">À propos</div>
+            <h2 class="section-title about-title" data-i18n-html="about.title">Leslie Guilbert<br>Consultante en transformation digitale</h2>
+            <p class="about-text" data-i18n="about.p1">Depuis 2014, j'accompagne des équipes B2B dans leur transformation digitale — de la stratégie jusqu'à l'exécution. Mon travail : mettre en place des systèmes CRM, des automatisations et des tableaux de bord qui font réellement avancer les équipes, sans complexité inutile.</p>
+            <p class="about-text" data-i18n="about.p2">Je travaille en direct avec les décideurs. Pas d'agence intermédiaire, pas de livrables creux — uniquement des résultats mesurables alignés avec vos objectifs business.</p>
+            <div class="about-creds">
+              <span class="about-cred">HubSpot Certified</span>
+              <span class="about-cred">Salesforce Consultant</span>
+              <span class="about-cred">Make Partner</span>
+              <span class="about-cred" data-i18n="about.cred_years">10+ ans d'expérience</span>
+              <span class="about-cred" data-i18n="about.cred_sectors">6 secteurs</span>
+            </div>
           </div>
-          <p class="about-text" data-i18n="about.p1">Depuis 2014, j'accompagne des équipes B2B dans leur transformation digitale — de la stratégie jusqu'à l'exécution. Mon travail : mettre en place des systèmes CRM, des automatisations et des tableaux de bord qui font réellement avancer les équipes, sans complexité inutile.</p>
-          <p class="about-text" data-i18n="about.p2">Je travaille en direct avec les décideurs. Pas d'agence intermédiaire, pas de livrables creux — uniquement des résultats mesurables alignés avec vos objectifs business.</p>
-          <div class="about-creds">
-            <span class="about-cred">HubSpot Certified</span>
-            <span class="about-cred">Salesforce Consultant</span>
-            <span class="about-cred">Make Partner</span>
-            <span class="about-cred" data-i18n="about.cred_years">10+ ans d'expérience</span>
-            <span class="about-cred" data-i18n="about.cred_sectors">6 secteurs</span>
+          <div class="about-photo-wrap">
+            <img src="Moi_2025_Pro.png" alt="Leslie Guilbert" width="260" height="320">
           </div>
         </div>
         <div class="about-segments">
@@ -2101,14 +2119,14 @@
         'hero.stat3_label': 'ans', 'hero.stat3_ctx': 'depuis 2014',
         'hero.cta1': 'Réserver un appel gratuit', 'hero.cta2': 'Voir les cas clients',
         'hero.testimonial_quote': '"Leslie a transformé notre CRM et toute notre gestion de données. Ce qui prenait des semaines à nos équipes tourne maintenant automatiquement."',
-        'hero.testimonial_attr': 'Antoine Bermejo — Directeur Marketing, Autorigin',
+        'hero.testimonial_attr': 'Antoine Bermejo · Directeur Marketing, Autorigin',
         'ticker.years': '10+ ans de CRM & automatisation', 'ticker.projects': '65+ projets livrés',
         'trust.header': "Ils m'ont fait confiance",
         'trust.sub.michelin': 'Hospitalité & Gastronomie', 'trust.sub.autorigin': 'Automobile',
         'trust.sub.lockdata': 'Cybersécurité', 'trust.sub.monaco': 'Marine & Nautisme',
         'trust.tools': 'Outils utilisés pour construire des systèmes durables :',
         'about.label': 'À propos',
-        'about.title': 'Leslie Guilbert —<br>Consultante en transformation digitale',
+        'about.title': 'Leslie Guilbert<br>Consultante en transformation digitale',
         'about.p1': "Depuis 2014, j'accompagne des équipes B2B dans leur transformation digitale — de la stratégie jusqu'à l'exécution. Mon travail : mettre en place des systèmes CRM, des automatisations et des tableaux de bord qui font réellement avancer les équipes, sans complexité inutile.",
         'about.p2': "Je travaille en direct avec les décideurs. Pas d'agence intermédiaire, pas de livrables creux — uniquement des résultats mesurables alignés avec vos objectifs business.",
         'about.cred_years': "10+ ans d'expérience", 'about.cred_sectors': '6 secteurs',
@@ -2175,14 +2193,14 @@
         'hero.stat3_label': 'years', 'hero.stat3_ctx': 'since 2014',
         'hero.cta1': 'Book a Free Strategy Call', 'hero.cta2': 'View Case Studies',
         'hero.testimonial_quote': '"Leslie transformed our entire CRM & data setup. What took our team weeks now runs automatically."',
-        'hero.testimonial_attr': 'Antoine Bermejo — Marketing Director, Autorigin',
+        'hero.testimonial_attr': 'Antoine Bermejo · Marketing Director, Autorigin',
         'ticker.years': '10+ years of CRM & automation', 'ticker.projects': '65+ projects delivered',
         'trust.header': 'Trusted by teams at',
         'trust.sub.michelin': 'Hospitality & Gastronomy', 'trust.sub.autorigin': 'Automotive',
         'trust.sub.lockdata': 'Cybersecurity', 'trust.sub.monaco': 'Marine & Nautical',
         'trust.tools': 'Tools I use to build systems that last:',
         'about.label': 'About',
-        'about.title': 'Leslie Guilbert —<br>Digital Transformation Consultant',
+        'about.title': 'Leslie Guilbert<br>Digital Transformation Consultant',
         'about.p1': "Since 2014, I've been helping B2B teams navigate digital transformation — from strategy to execution. My work: building CRM systems, automations, and dashboards that genuinely move teams forward, without unnecessary complexity.",
         'about.p2': "I work directly with decision-makers. No agency middleman, no hollow deliverables — only measurable results aligned with your business goals.",
         'about.cred_years': '10+ years experience', 'about.cred_sectors': '6 sectors',
