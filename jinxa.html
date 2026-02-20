@@ -1,0 +1,2410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jinxa — Transformation digitale & automatisation. 10+ ans à transformer la complexité opérationnelle en croissance mesurable pour les équipes B2B.">
+  <title>Jinxa — CRM, Automatisation & Stratégie Digitale</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========== CSS VARIABLES ========== */
+    :root {
+      --bg-primary:       #0a0b0d;
+      --bg-card:          #111318;
+      --bg-card-hover:    #181d24;
+      --accent-primary:   #34d399;
+      --accent-secondary: #10b981;
+      --accent-glow:      rgba(52, 211, 153, 0.15);
+      --text-primary:     #f0f0f5;
+      --text-secondary:   #8a8a9a;
+      --text-muted:       #5a5a6a;
+      --border:           rgba(255,255,255,0.05);
+    }
+
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Inter Tight', sans-serif;
+      line-height: 1.2;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ========== UTILITIES ========== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 16px 0;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(10, 11, 13, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--bg-primary);
+      background: var(--accent-primary);
+      padding: 10px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(52, 211, 153, 0.3);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      background: transparent;
+      padding: 10px 24px;
+      border-radius: 8px;
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(52, 211, 153, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(52, 211, 153, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      padding: 8px 20px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero-stat {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .hero-stat-number {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+
+    .hero-stat-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Parallax elements */
+    .parallax-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .p-el {
+      position: absolute;
+    }
+
+    /* Wireframe cube */
+    .p-cube {
+      top: 15%;
+      right: 12%;
+      width: 80px;
+      height: 80px;
+      border: 1px solid rgba(52, 211, 153, 0.15);
+      transform: rotate(45deg) rotateX(15deg);
+      animation: floatSlow 8s ease-in-out infinite;
+      opacity: 0.2;
+    }
+
+    .p-cube::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      right: -15px;
+      bottom: -15px;
+      border: 1px solid rgba(52, 211, 153, 0.08);
+      transform: rotate(12deg);
+    }
+
+    /* Data node */
+    .p-node {
+      top: 25%;
+      right: 30%;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      opacity: 0.2;
+      animation: floatMedium 6s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
+    }
+
+    .p-node::before,
+    .p-node::after {
+      content: '';
+      position: absolute;
+      background: rgba(52, 211, 153, 0.1);
+    }
+
+    .p-node::before {
+      top: 50%;
+      left: 100%;
+      width: 60px;
+      height: 1px;
+    }
+
+    .p-node::after {
+      top: 100%;
+      left: 50%;
+      width: 1px;
+      height: 40px;
+    }
+
+    /* Sphere */
+    .p-sphere {
+      top: 40%;
+      right: 20%;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(52, 211, 153, 0.18), transparent 70%);
+      border: 1px solid rgba(52, 211, 153, 0.1);
+      animation: floatMedium 7s ease-in-out infinite;
+      opacity: 0.25;
+    }
+
+    /* Dashboard widget */
+    .p-widget {
+      top: 55%;
+      right: 8%;
+      width: 100px;
+      height: 60px;
+      border: 1px solid rgba(52, 211, 153, 0.1);
+      border-radius: 6px;
+      opacity: 0.15;
+      animation: floatSlow 10s ease-in-out infinite reverse;
+    }
+
+    .p-widget::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      height: 2px;
+      background: rgba(52, 211, 153, 0.2);
+      border-radius: 1px;
+    }
+
+    .p-widget::after {
+      content: '';
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      width: 40%;
+      height: 20px;
+      border: 1px solid rgba(52, 211, 153, 0.1);
+      border-radius: 3px;
+    }
+
+    /* Ring */
+    .p-ring {
+      bottom: 30%;
+      right: 35%;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 1px solid rgba(52, 211, 153, 0.1);
+      animation: floatSlow 12s ease-in-out infinite;
+      opacity: 0.15;
+    }
+
+    .p-ring::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(52, 211, 153, 0.08);
+    }
+
+    /* Small dots */
+    .p-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      opacity: 0.2;
+    }
+
+    .p-dot-1 { top: 20%; right: 45%; animation: floatMedium 5s ease-in-out infinite; }
+    .p-dot-2 { top: 65%; right: 15%; animation: floatSlow 7s ease-in-out infinite 1s; }
+    .p-dot-3 { top: 45%; right: 42%; animation: floatMedium 9s ease-in-out infinite 2s; }
+
+    /* Grid element */
+    .p-grid {
+      bottom: 20%;
+      right: 25%;
+      width: 60px;
+      height: 60px;
+      opacity: 0.12;
+      animation: floatMedium 8s ease-in-out infinite 3s;
+      background-image:
+        linear-gradient(rgba(52, 211, 153, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(52, 211, 153, 0.3) 1px, transparent 1px);
+      background-size: 15px 15px;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes floatMedium {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* ========== TOOLS BANNER (Marquee) ========== */
+    .tools-banner {
+      padding: 80px 0 60px;
+    }
+
+    .tools-banner-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .tools-banner-header p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    .marquee-wrapper {
+      overflow: hidden;
+      position: relative;
+      padding: 24px 0;
+    }
+
+    .marquee-wrapper::before,
+    .marquee-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .marquee-wrapper::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--bg-primary), transparent);
+    }
+
+    .marquee-wrapper::after {
+      right: 0;
+      background: linear-gradient(270deg, var(--bg-primary), transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: marquee 35s linear infinite;
+    }
+
+    .marquee-wrapper:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    .marquee-item {
+      flex-shrink: 0;
+      padding: 14px 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .marquee-item:hover {
+      color: var(--text-primary);
+      border-color: rgba(52, 211, 153, 0.2);
+    }
+
+    .marquee-item svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ========== CASE STUDIES ========== */
+    .cases {
+      padding: 100px 0;
+    }
+
+    .cases-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .cases-header .section-subtitle {
+      margin: 0 auto;
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .case-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 3px solid transparent;
+      border-radius: 16px;
+      padding: 32px;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s, border-top-color 0.3s;
+    }
+
+    .case-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(52, 211, 153, 0.2);
+      border-top-color: var(--accent-primary);
+      box-shadow: 0 16px 40px var(--accent-glow);
+    }
+
+    .case-client {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+
+    .case-section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-primary);
+      border-left: 2px solid var(--accent-primary);
+      background: rgba(52, 211, 153, 0.04);
+      padding: 3px 8px;
+      border-radius: 0 4px 4px 0;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .case-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .case-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .case-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.15);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .case-numbers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .case-number {
+      text-align: center;
+    }
+
+    .case-number-value {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 4px;
+    }
+
+    .case-number-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== HOW IT WORKS ========== */
+    .how-it-works {
+      padding: 100px 0;
+    }
+
+    .how-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent-primary), rgba(52, 211, 153, 0.2));
+    }
+
+    .timeline-step {
+      position: relative;
+      padding-left: 80px;
+      padding-bottom: 64px;
+    }
+
+    .timeline-step:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-icon {
+      position: absolute;
+      left: 8px;
+      top: 0;
+      width: 42px;
+      height: 42px;
+      background: var(--bg-primary);
+      border: 2px solid var(--accent-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      z-index: 1;
+    }
+
+    .timeline-step-number {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .timeline-step h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .timeline-step p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .timeline-pill {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--bg-primary);
+      background: var(--accent-primary);
+      padding: 6px 16px;
+      border-radius: 100px;
+    }
+
+    /* ========== SERVICES ========== */
+    .services {
+      padding: 100px 0;
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(52, 211, 153, 0.2);
+      box-shadow: 0 16px 40px var(--accent-glow);
+    }
+
+    .service-icon {
+      margin-bottom: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.15);
+      border-radius: 12px;
+      color: var(--accent-primary);
+    }
+
+    .service-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .service-title {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .service-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ========== CTA SECTION ========== */
+    .cta {
+      padding: 120px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 64px 48px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta h2 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .cta .btn-primary {
+      font-size: 1rem;
+      padding: 16px 36px;
+      box-shadow: 0 0 40px rgba(52, 211, 153, 0.2);
+    }
+
+    .cta .btn-primary:hover {
+      box-shadow: 0 0 60px rgba(52, 211, 153, 0.35);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer-email {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+
+    .footer-email:hover {
+      color: var(--accent-primary);
+    }
+
+    .footer-linkedin {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+
+    .footer-linkedin:hover {
+      color: var(--accent-primary);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== HERO BADGE SUB ========== */
+    .hero-badge-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: -18px;
+      margin-bottom: 24px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ========== HERO STAT CONTEXT ========== */
+    .hero-stat-context {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    /* ========== HERO TESTIMONIAL ========== */
+    .hero-testimonial {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(52, 211, 153, 0.04);
+      border: 1px solid rgba(52, 211, 153, 0.12);
+      border-radius: 12px;
+      padding: 14px 20px;
+      max-width: 540px;
+    }
+
+    .hero-testimonial-avatar {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(52, 211, 153, 0.12);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+
+    .hero-testimonial-body { flex: 1; }
+
+    .hero-testimonial-quote {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      font-style: italic;
+      margin-bottom: 4px;
+    }
+
+    .hero-testimonial-attr {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* ========== HERO TICKER ========== */
+    .hero-ticker {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+      background: rgba(52, 211, 153, 0.015);
+    }
+
+    .hero-ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 25s linear infinite;
+    }
+
+    .hero-ticker:hover .hero-ticker-track {
+      animation-play-state: paused;
+    }
+
+    .hero-ticker-item {
+      padding: 0 32px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-ticker-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      opacity: 0.6;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ========== SECTION DIVIDER ========== */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.2), transparent);
+      margin: 0;
+    }
+
+    /* ========== PULSING DOT on section label ========== */
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); }
+      50% { box-shadow: 0 0 0 5px rgba(52, 211, 153, 0); }
+    }
+
+    .section-label {
+      position: relative;
+    }
+
+    /* ========== TRUST BADGES ========== */
+    .tools-trust-header {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .trust-badges {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      list-style: none;
+      padding: 0;
+      margin-top: 0;
+    }
+
+    .trust-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 12px;
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+
+    .trust-badge:hover {
+      border-color: rgba(52, 211, 153, 0.3);
+      box-shadow: 0 4px 20px rgba(52, 211, 153, 0.08);
+    }
+
+    .trust-badge-icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    .trust-badge-logo-wrap {
+      width: 28px;
+      height: 28px;
+      background: #fff;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+      padding: 2px;
+    }
+
+    .trust-badge-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .trust-badge-name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .trust-badge-sub {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ========== CASE INDUSTRY TAG ========== */
+    .case-industry-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 10px;
+    }
+
+    .case-industry-tag.enterprise {
+      background: rgba(99, 102, 241, 0.1);
+      color: #818cf8;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+    }
+
+    .case-industry-tag.automotive {
+      background: rgba(251, 146, 60, 0.1);
+      color: #fb923c;
+      border: 1px solid rgba(251, 146, 60, 0.2);
+    }
+
+    .case-industry-tag.data-security {
+      background: rgba(52, 211, 153, 0.08);
+      color: var(--accent-primary);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+    }
+
+    /* ========== CASE DISPLAY STAT ========== */
+    .case-display-stat {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: var(--accent-primary);
+      line-height: 1;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+
+    /* ========== TIMELINE BULLETS ========== */
+    .timeline-bullets {
+      list-style: none;
+      margin: 0 0 16px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .timeline-bullets li {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .timeline-bullets li::before {
+      content: '→';
+      color: var(--accent-primary);
+      flex-shrink: 0;
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+
+    /* ========== SERVICE BULLETS ========== */
+    .service-bullets {
+      list-style: none;
+      margin: 12px 0 0;
+      padding: 12px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px solid var(--border);
+    }
+
+    .service-bullets li {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.5;
+    }
+
+    .service-bullets li::before {
+      content: '•';
+      color: var(--accent-primary);
+      flex-shrink: 0;
+    }
+
+    /* ========== CTA NEXT STEPS ========== */
+    .cta-what-happens {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .cta-next-steps {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin: 0 auto 32px;
+      flex-wrap: wrap;
+    }
+
+    .cta-next-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .cta-next-step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      flex-shrink: 0;
+    }
+
+    .cta-no-pitch {
+      display: block;
+      margin-top: 14px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .cases-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .p-cube, .p-ring, .p-widget {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 64px 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      /* Mobile menu */
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10, 11, 13, 0.95);
+        backdrop-filter: blur(12px);
+        padding: 24px;
+        gap: 20px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 120px 0 60px;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-stats {
+        gap: 20px;
+      }
+
+      .hero-stat-number {
+        font-size: 1.2rem;
+      }
+
+      .cases-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-numbers {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .case-number-value {
+        font-size: 1.1rem;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-step {
+        padding-left: 64px;
+      }
+
+      .timeline-icon {
+        left: 0;
+        width: 40px;
+        height: 40px;
+      }
+
+      .cta-content {
+        padding: 40px 24px;
+      }
+
+      .footer .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-left, .footer-right {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+
+    /* ========== LANG TOGGLE ========== */
+    .lang-toggle {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      line-height: 1;
+    }
+
+    .lang-toggle:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    /* ========== ABOUT ========== */
+    .about-inner {
+      max-width: 720px;
+      margin-bottom: 56px;
+    }
+
+    .about-title { margin-bottom: 20px; line-height: 1.25; }
+
+    .about-photo-wrap { margin: 28px 0 32px; }
+
+    .about-photo-wrap img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid rgba(52, 211, 153, 0.18);
+      box-shadow: 0 8px 40px rgba(52, 211, 153, 0.08);
+    }
+
+    .about-text {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      max-width: 680px;
+      margin-bottom: 16px;
+    }
+
+    .about-creds {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .about-cred {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 8px;
+    }
+
+    .about-segments {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .about-segment {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .about-segment:hover { border-color: rgba(52, 211, 153, 0.2); }
+
+    .about-segment-mark {
+      font-size: 1.1rem;
+      color: var(--accent-primary);
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+
+    .about-segment strong {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .about-segment p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .about-segments { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="logo" id="logo-link">JINXA</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+        <li><a href="#case-studies" data-i18n="nav.cases">Cas clients</a></li>
+        <li><a href="#how-it-works" data-i18n="nav.process">Processus</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        <li><button class="lang-toggle" id="lang-toggle" aria-label="Switch language">EN</button></li>
+        <li>
+          <a href="https://calendly.com/jinxa/one-on-one" target="_blank" rel="noopener" class="btn-primary" data-i18n="nav.cta">Réserver un appel</a>
+        </li>
+      </ul>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="hero">
+      <div class="parallax-elements" id="parallax">
+        <div class="p-el p-cube" data-speed="0.03"></div>
+        <div class="p-el p-node" data-speed="0.05"></div>
+        <div class="p-el p-sphere" data-speed="0.04"></div>
+        <div class="p-el p-widget" data-speed="0.02"></div>
+        <div class="p-el p-ring" data-speed="0.03"></div>
+        <div class="p-el p-dot p-dot-1" data-speed="0.06"></div>
+        <div class="p-el p-dot p-dot-2" data-speed="0.04"></div>
+        <div class="p-el p-dot p-dot-3" data-speed="0.07"></div>
+        <div class="p-el p-grid" data-speed="0.04"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content reveal">
+          <div class="hero-badge" data-i18n="hero.badge">CRM · Automatisation · NoCode & IA</div>
+          <p class="hero-badge-sub" data-i18n="hero.badge_sub">Pour les équipes B2B en croissance</p>
+          <h1 data-i18n="hero.h1">Transformez le chaos opérationnel en moteur de croissance.</h1>
+          <p class="hero-sub" data-i18n="hero.sub">10+ ans à structurer des systèmes qui font vraiment avancer les équipes. CRM, automatisation, stratégie data — sans jargon, avec des résultats.</p>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-number" data-target="42" data-suffix="+">0</span>
+              <span class="hero-stat-label"><span data-i18n="hero.stat1_label">clients</span><span class="hero-stat-context" data-i18n="hero.stat1_ctx">dans 6 secteurs</span></span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-number" data-target="65" data-suffix="+">0</span>
+              <span class="hero-stat-label"><span data-i18n="hero.stat2_label">projets</span><span class="hero-stat-context" data-i18n="hero.stat2_ctx">livrés de A à Z</span></span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-number" data-target="10" data-suffix="+">0</span>
+              <span class="hero-stat-label"><span data-i18n="hero.stat3_label">ans</span><span class="hero-stat-context" data-i18n="hero.stat3_ctx">depuis 2014</span></span>
+            </div>
+          </div>
+          <div class="hero-ctas">
+            <a href="https://calendly.com/jinxa/one-on-one" target="_blank" rel="noopener" class="btn-primary" data-i18n="hero.cta1">
+              Réserver un appel gratuit
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#case-studies" class="btn-secondary" data-i18n="hero.cta2">
+              Voir les cas clients
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+          <div class="hero-testimonial">
+            <div class="hero-testimonial-avatar">AB</div>
+            <div class="hero-testimonial-body">
+              <p class="hero-testimonial-quote" data-i18n="hero.testimonial_quote">"Leslie a transformé notre CRM et toute notre gestion de données. Ce qui prenait des semaines à nos équipes tourne maintenant automatiquement."</p>
+              <span class="hero-testimonial-attr" data-i18n="hero.testimonial_attr">Antoine Bermejo — Directeur Marketing, Autorigin</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TICKER ========== -->
+    <div class="hero-ticker">
+      <div class="hero-ticker-track">
+        <span class="hero-ticker-item">Guide Michelin<span class="hero-ticker-dot"></span></span>
+        <span class="hero-ticker-item">Autorigin<span class="hero-ticker-dot"></span></span>
+        <span class="hero-ticker-item">LockData<span class="hero-ticker-dot"></span></span>
+        <span class="hero-ticker-item" data-i18n="ticker.years">10+ ans de CRM & automatisation<span class="hero-ticker-dot"></span></span>
+        <span class="hero-ticker-item" data-i18n="ticker.projects">65+ projets livrés<span class="hero-ticker-dot"></span></span>
+        <span class="hero-ticker-item">HubSpot · Salesforce · Make · Zapier<span class="hero-ticker-dot"></span></span>
+        <span class="hero-ticker-item">Guide Michelin<span class="hero-ticker-dot"></span></span>
+        <span class="hero-ticker-item">Autorigin<span class="hero-ticker-dot"></span></span>
+        <span class="hero-ticker-item">LockData<span class="hero-ticker-dot"></span></span>
+        <span class="hero-ticker-item" data-i18n="ticker.years">10+ ans de CRM & automatisation<span class="hero-ticker-dot"></span></span>
+        <span class="hero-ticker-item" data-i18n="ticker.projects">65+ projets livrés<span class="hero-ticker-dot"></span></span>
+        <span class="hero-ticker-item">HubSpot · Salesforce · Make · Zapier<span class="hero-ticker-dot"></span></span>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ========== TOOLS BANNER (Marquee) ========== -->
+    <section class="tools-banner" id="tools">
+      <div class="container">
+        <div class="tools-banner-header reveal">
+          <p class="tools-trust-header" data-i18n="trust.header">Ils m'ont fait confiance</p>
+          <ul class="trust-badges">
+            <li class="trust-badge">
+              <div class="trust-badge-logo-wrap">
+                <img class="trust-badge-logo" src="https://logo.clearbit.com/guide.michelin.com" alt="Guide Michelin"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <svg style="display:none;width:18px;height:18px;color:var(--accent-primary)" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+              </div>
+              <span class="trust-badge-name">
+                <span>Guide Michelin</span>
+                <span class="trust-badge-sub" data-i18n="trust.sub.michelin">Hospitalité &amp; Gastronomie</span>
+              </span>
+            </li>
+            <li class="trust-badge">
+              <div class="trust-badge-logo-wrap">
+                <img class="trust-badge-logo" src="https://logo.clearbit.com/autorigin.com" alt="Autorigin"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <svg style="display:none;width:18px;height:18px;color:var(--accent-primary)" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>
+              </div>
+              <span class="trust-badge-name">
+                <span>Autorigin</span>
+                <span class="trust-badge-sub" data-i18n="trust.sub.autorigin">Automobile</span>
+              </span>
+            </li>
+            <li class="trust-badge">
+              <div class="trust-badge-logo-wrap">
+                <img class="trust-badge-logo" src="https://logo.clearbit.com/lockdata.fr" alt="LockData"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <svg style="display:none;width:18px;height:18px;color:var(--accent-primary)" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <span class="trust-badge-name">
+                <span>LockData</span>
+                <span class="trust-badge-sub" data-i18n="trust.sub.lockdata">Cybersécurité</span>
+              </span>
+            </li>
+            <li class="trust-badge">
+              <div class="trust-badge-logo-wrap">
+                <img class="trust-badge-logo" src="https://logo.clearbit.com/monacomarine.com" alt="Monaco Marine"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <svg style="display:none;width:18px;height:18px;color:var(--accent-primary)" viewBox="0 0 24 24" fill="none"><path d="M3 17l4-8 4 4 4-6 4 10H3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="trust-badge-name">
+                <span>Monaco Marine</span>
+                <span class="trust-badge-sub" data-i18n="trust.sub.monaco">Marine &amp; Nautisme</span>
+              </span>
+            </li>
+          </ul>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;" data-i18n="trust.tools">Outils utilisés pour construire des systèmes durables :</p>
+        </div>
+      </div>
+      <div class="marquee-wrapper">
+        <div class="marquee-track">
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Make
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            HubSpot
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Salesforce
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M9 3v18M3 9h18" stroke="currentColor" stroke-width="1.5"/></svg>
+            Notion
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Zapier
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>
+            Airtable
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 12a2 2 0 000 4h4v-4h-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Google Analytics
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Mailchimp
+          </div>
+          <!-- Duplicate for seamless loop -->
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Make
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            HubSpot
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Salesforce
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M9 3v18M3 9h18" stroke="currentColor" stroke-width="1.5"/></svg>
+            Notion
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Zapier
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>
+            Airtable
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 12a2 2 0 000 4h4v-4h-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Google Analytics
+          </div>
+          <div class="marquee-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Mailchimp
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ========== ABOUT ========== -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about-inner reveal">
+          <div class="section-label" data-i18n="about.label">À propos</div>
+          <h2 class="section-title about-title" data-i18n-html="about.title">Leslie Guilbert —<br>Consultante en transformation digitale</h2>
+          <div class="about-photo-wrap">
+            <img src="image.png" alt="Leslie Guilbert" width="220" height="220">
+          </div>
+          <p class="about-text" data-i18n="about.p1">Depuis 2014, j'accompagne des équipes B2B dans leur transformation digitale — de la stratégie jusqu'à l'exécution. Mon travail : mettre en place des systèmes CRM, des automatisations et des tableaux de bord qui font réellement avancer les équipes, sans complexité inutile.</p>
+          <p class="about-text" data-i18n="about.p2">Je travaille en direct avec les décideurs. Pas d'agence intermédiaire, pas de livrables creux — uniquement des résultats mesurables alignés avec vos objectifs business.</p>
+          <div class="about-creds">
+            <span class="about-cred">HubSpot Certified</span>
+            <span class="about-cred">Salesforce Consultant</span>
+            <span class="about-cred">Make Partner</span>
+            <span class="about-cred" data-i18n="about.cred_years">10+ ans d'expérience</span>
+            <span class="about-cred" data-i18n="about.cred_sectors">6 secteurs</span>
+          </div>
+        </div>
+        <div class="about-segments">
+          <div class="about-segment reveal">
+            <span class="about-segment-mark">→</span>
+            <div>
+              <strong data-i18n="about.seg1.title">Équipes commerciales</strong>
+              <p data-i18n="about.seg1.desc">CRM, pipelines, automatisation des relances — votre équipe vend, pas elle gère des outils.</p>
+            </div>
+          </div>
+          <div class="about-segment reveal">
+            <span class="about-segment-mark">→</span>
+            <div>
+              <strong data-i18n="about.seg2.title">Équipes marketing</strong>
+              <p data-i18n="about.seg2.desc">Segmentation, nurturing, reporting — des campagnes pilotées par la data, pas l'intuition.</p>
+            </div>
+          </div>
+          <div class="about-segment reveal">
+            <span class="about-segment-mark">→</span>
+            <div>
+              <strong data-i18n="about.seg3.title">Dirigeants &amp; fondateurs</strong>
+              <p data-i18n="about.seg3.desc">Vision claire, systèmes solides, résultats traçables — pour piloter avec confiance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ========== CASE STUDIES ========== -->
+    <section class="cases section" id="case-studies">
+      <div class="container">
+        <div class="cases-header reveal">
+          <div class="section-label" data-i18n="cases.label">Résultats</div>
+          <h2 class="section-title" data-i18n="cases.title">Des résultats concrets, tous secteurs</h2>
+        </div>
+
+        <div class="cases-grid">
+          <!-- Case Study 1 — Guide Michelin -->
+          <div class="case-card reveal">
+            <span class="case-industry-tag enterprise">Enterprise</span>
+            <div class="case-display-stat">30%</div>
+            <div class="case-client">Guide Michelin</div>
+            <div class="case-section-label" data-i18n="case.challenge">Défi</div>
+            <p class="case-text" data-i18n="cases.michelin.challenge">Fluidifier les processus internes et éliminer les inefficacités entre équipes.</p>
+            <div class="case-section-label" data-i18n="case.solution">Solution</div>
+            <p class="case-text" data-i18n="cases.michelin.solution">Automatisation de la stack martech avec Make + HubSpot pour supprimer les transmissions manuelles.</p>
+            <div class="case-badges">
+              <span class="case-badge" data-i18n="cases.michelin.b1">30% de flux accélérés</span>
+              <span class="case-badge" data-i18n="cases.michelin.b2">Zéro transfert manuel</span>
+              <span class="case-badge" data-i18n="cases.michelin.b3">3 mois de déploiement</span>
+            </div>
+            <div class="case-numbers">
+              <div class="case-number">
+                <div class="case-number-value case-counter" data-target="30" data-suffix="%">0</div>
+                <div class="case-number-label" data-i18n="cases.michelin.n1">Plus rapide</div>
+              </div>
+              <div class="case-number">
+                <div class="case-number-value">0</div>
+                <div class="case-number-label" data-i18n="cases.michelin.n2">Transferts manuels</div>
+              </div>
+              <div class="case-number">
+                <div class="case-number-value">3mo</div>
+                <div class="case-number-label" data-i18n="cases.michelin.n3">Déploiement</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Study 2 — Autorigin -->
+          <div class="case-card reveal">
+            <span class="case-industry-tag automotive">Automotive</span>
+            <div class="case-display-stat">2x</div>
+            <div class="case-client">Autorigin</div>
+            <div class="case-section-label" data-i18n="case.challenge">Défi</div>
+            <p class="case-text" data-i18n="cases.autorigin.challenge">Aligner sales et marketing pour une meilleure acquisition dans l'industrie automobile.</p>
+            <div class="case-section-label" data-i18n="case.solution">Solution</div>
+            <p class="case-text" data-i18n="cases.autorigin.solution">Implémentation CRM + système de gestion de données avec tableaux de bord temps réel.</p>
+            <div class="case-badges">
+              <span class="case-badge" data-i18n="cases.autorigin.b1">2x conversion leads</span>
+              <span class="case-badge" data-i18n="cases.autorigin.b2">Sales &amp; marketing alignés</span>
+              <span class="case-badge" data-i18n="cases.autorigin.b3">Tableaux de bord temps réel</span>
+            </div>
+            <div class="case-numbers">
+              <div class="case-number">
+                <div class="case-number-value case-counter" data-target="2" data-suffix="x">0</div>
+                <div class="case-number-label" data-i18n="cases.autorigin.n1">Conversion leads</div>
+              </div>
+              <div class="case-number">
+                <div class="case-number-value case-counter" data-target="100" data-suffix="%">0</div>
+                <div class="case-number-label" data-i18n="cases.autorigin.n2">Aligné</div>
+              </div>
+              <div class="case-number">
+                <div class="case-number-value">Temps réel</div>
+                <div class="case-number-label" data-i18n="cases.autorigin.n3">Tableaux</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Study 3 — LockData -->
+          <div class="case-card reveal">
+            <span class="case-industry-tag data-security">Data Security</span>
+            <div class="case-display-stat">50%</div>
+            <div class="case-client">LockData</div>
+            <div class="case-section-label" data-i18n="case.challenge">Défi</div>
+            <p class="case-text" data-i18n="cases.lockdata.challenge">Construire des systèmes scalables et améliorer le suivi des performances en cybersécurité.</p>
+            <div class="case-section-label" data-i18n="case.solution">Solution</div>
+            <p class="case-text" data-i18n="cases.lockdata.solution">Workflows d'automatisation marketing + tableaux de bord analytics pour une visibilité totale.</p>
+            <div class="case-badges">
+              <span class="case-badge" data-i18n="cases.lockdata.b1">50% de temps économisé</span>
+              <span class="case-badge" data-i18n="cases.lockdata.b2">Visibilité totale</span>
+              <span class="case-badge" data-i18n="cases.lockdata.b3">Opérations scalables</span>
+            </div>
+            <div class="case-numbers">
+              <div class="case-number">
+                <div class="case-number-value case-counter" data-target="50" data-suffix="%">0</div>
+                <div class="case-number-label" data-i18n="cases.lockdata.n1">Temps économisé</div>
+              </div>
+              <div class="case-number">
+                <div class="case-number-value">360&deg;</div>
+                <div class="case-number-label" data-i18n="cases.lockdata.n2">Visibilité</div>
+              </div>
+              <div class="case-number">
+                <div class="case-number-value" data-i18n="cases.lockdata.n3_val">Scalable</div>
+                <div class="case-number-label" data-i18n="cases.lockdata.n3">Opérations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ========== HOW IT WORKS ========== -->
+    <section class="how-it-works section" id="how-it-works">
+      <div class="container">
+        <div class="how-header reveal">
+          <div class="section-label" data-i18n="how.label">Processus</div>
+          <h2 class="section-title" data-i18n="how.title">Comment je vous aide à avancer</h2>
+        </div>
+
+        <div class="timeline">
+          <!-- Step 1 -->
+          <div class="timeline-step reveal">
+            <div class="timeline-icon">&#128222;</div>
+            <div class="timeline-step-number" data-i18n="how.step1.num">Étape 1</div>
+            <h3 data-i18n="how.step1.title">Diagnostic &amp; Découverte</h3>
+            <p data-i18n="how.step1.desc">On commence par un appel gratuit de 30 minutes. J'écoute vos défis, cartographie vos workflows actuels et identifie où l'automatisation et la data peuvent créer le plus d'impact.</p>
+            <ul class="timeline-bullets">
+              <li data-i18n="how.step1.b1">Cartographie de vos outils &amp; workflows actuels</li>
+              <li data-i18n="how.step1.b2">Identification des 3 principales opportunités d'automatisation</li>
+              <li data-i18n="how.step1.b3">Audit qualité des données &amp; santé CRM</li>
+            </ul>
+            <span class="timeline-pill" data-i18n="how.step1.pill">⏱ Gratuit. Sans engagement.</span>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="timeline-step reveal">
+            <div class="timeline-icon">&#128203;</div>
+            <div class="timeline-step-number" data-i18n="how.step2.num">Étape 2</div>
+            <h3 data-i18n="how.step2.title">Feuille de route actionnable</h3>
+            <p data-i18n="how.step2.desc">Je construis une stratégie data-driven adaptée à vos objectifs. Vous recevez une roadmap claire avec priorités, délais et résultats attendus avant tout démarrage.</p>
+            <ul class="timeline-bullets">
+              <li data-i18n="how.step2.b1">Quick wins prioritaires + roadmap long terme</li>
+              <li data-i18n="how.step2.b2">Sélection d'outils &amp; architecture d'intégration</li>
+              <li data-i18n="how.step2.b3">KPIs et métriques de succès définis</li>
+            </ul>
+            <span class="timeline-pill" data-i18n="how.step2.pill">📄 Transparence totale.</span>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="timeline-step reveal">
+            <div class="timeline-icon">&#128640;</div>
+            <div class="timeline-step-number" data-i18n="how.step3.num">Étape 3</div>
+            <h3 data-i18n="how.step3.title">Construire, Tester, Lancer</h3>
+            <p data-i18n="how.step3.desc">J'implémente les systèmes, intègre vos outils et forme vos équipes à leur utilisation. Vous bénéficiez d'un support continu pour assurer la scalabilité.</p>
+            <ul class="timeline-bullets">
+              <li data-i18n="how.step3.b1">Design de scénarios, tests &amp; déploiement</li>
+              <li data-i18n="how.step3.b2">Formation &amp; sessions d'adoption des équipes</li>
+              <li data-i18n="how.step3.b3">Transfert avec documentation complète</li>
+            </ul>
+            <span class="timeline-pill" data-i18n="how.step3.pill">🗓 Livré en 4–8 semaines.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ========== SERVICES ========== -->
+    <section class="services section" id="services">
+      <div class="container">
+        <div class="services-header reveal">
+          <div class="section-label" data-i18n="services.label">Services</div>
+          <h2 class="section-title" data-i18n="services.title">Ce que je fais le mieux</h2>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="16 7 22 7 22 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="service-title" data-i18n="svc.strategy.title">Stratégie de Croissance</h3>
+            <p class="service-desc" data-i18n="svc.strategy.desc">Des roadmaps actionnables et data-driven, alignées avec vos objectifs business.</p>
+            <ul class="service-bullets">
+              <li data-i18n="svc.strategy.b1">Roadmap d'acquisition basée sur la data</li>
+              <li data-i18n="svc.strategy.b2">Optimisation du mix de canaux</li>
+              <li data-i18n="svc.strategy.b3">Revues de performance mensuelles</li>
+            </ul>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <h3 class="service-title" data-i18n="svc.automation.title">Automatisation des Workflows</h3>
+            <p class="service-desc" data-i18n="svc.automation.desc">Des systèmes intelligents avec Make, Zapier et APIs custom pour gagner du temps et scaler.</p>
+            <ul class="service-bullets">
+              <li data-i18n="svc.automation.b1">Design de scénarios Make &amp; Zapier</li>
+              <li data-i18n="svc.automation.b2">Connecteurs API personnalisés</li>
+              <li data-i18n="svc.automation.b3">Systèmes d'alertes Slack/email</li>
+            </ul>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="5" rx="9" ry="3" stroke="currentColor" stroke-width="2"/><path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12" stroke="currentColor" stroke-width="2"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <h3 class="service-title" data-i18n="svc.crm.title">Implémentation CRM</h3>
+            <p class="service-desc" data-i18n="svc.crm.desc">Configuration et optimisation de HubSpot, Salesforce et Notion pour qu'ils soient vraiment utilisés.</p>
+            <ul class="service-bullets">
+              <li data-i18n="svc.crm.b1">Setup HubSpot &amp; Salesforce</li>
+              <li data-i18n="svc.crm.b2">Migration &amp; nettoyage des données</li>
+              <li data-i18n="svc.crm.b3">Onboarding &amp; formation des équipes</li>
+            </ul>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="18" y="3" width="4" height="18" rx="1" stroke="currentColor" stroke-width="2"/><rect x="10" y="8" width="4" height="13" rx="1" stroke="currentColor" stroke-width="2"/><rect x="2" y="13" width="4" height="8" rx="1" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <h3 class="service-title" data-i18n="svc.analytics.title">Analytics &amp; Tableaux de Bord</h3>
+            <p class="service-desc" data-i18n="svc.analytics.desc">Des dashboards qui coupent le bruit et suivent ce qui compte vraiment.</p>
+            <ul class="service-bullets">
+              <li data-i18n="svc.analytics.b1">Ateliers de définition des KPIs</li>
+              <li data-i18n="svc.analytics.b2">Construction de dashboards sur mesure</li>
+              <li data-i18n="svc.analytics.b3">Rapports automatisés hebdomadaires</li>
+            </ul>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+            </div>
+            <h3 class="service-title" data-i18n="svc.marketing.title">Marketing Performance</h3>
+            <p class="service-desc" data-i18n="svc.marketing.desc">Planification et exécution de campagnes SEO, SEA et CRM pour un ROI mesurable.</p>
+            <ul class="service-bullets">
+              <li data-i18n="svc.marketing.b1">Planification de campagnes cross-canal</li>
+              <li data-i18n="svc.marketing.b2">Audit &amp; optimisation SEO/SEA</li>
+              <li data-i18n="svc.marketing.b3">Séquences email pilotées par CRM</li>
+            </ul>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="service-title" data-i18n="svc.adoption.title">Adoption Digitale</h3>
+            <p class="service-desc" data-i18n="svc.adoption.desc">Déploiement de nouveaux outils et formation de vos équipes pour qu'ils les utilisent vraiment.</p>
+            <ul class="service-bullets">
+              <li data-i18n="svc.adoption.b1">Planification du déploiement des outils</li>
+              <li data-i18n="svc.adoption.b2">Sessions de formation des équipes</li>
+              <li data-i18n="svc.adoption.b3">Suivi d'utilisation &amp; itération</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ========== CTA FINAL ========== -->
+    <section class="cta section" id="contact">
+      <div class="container">
+        <div class="cta-content reveal">
+          <h2 data-i18n="cta.title">Prêt à transformer vos opérations ?</h2>
+          <p data-i18n="cta.sub">Réservez un appel stratégique gratuit de 30 minutes. Pas d'argumentaire commercial — juste une vraie conversation sur comment l'automatisation et la data peuvent débloquer votre croissance.</p>
+          <span class="cta-what-happens" data-i18n="cta.whathappens">Ce qui se passe après votre réservation :</span>
+          <div class="cta-next-steps">
+            <div class="cta-next-step"><span class="cta-next-step-num">1</span><span data-i18n="cta.step1">Appel découverte 30 min</span></div>
+            <div class="cta-next-step"><span class="cta-next-step-num">2</span><span data-i18n="cta.step2">Roadmap personnalisée sous 48h</span></div>
+            <div class="cta-next-step"><span class="cta-next-step-num">3</span><span data-i18n="cta.step3">Lancement du projet</span></div>
+          </div>
+          <a href="https://calendly.com/jinxa/one-on-one" target="_blank" rel="noopener" class="btn-primary" data-i18n="cta.btn">
+            Réserver votre appel gratuit
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <span class="cta-no-pitch" data-i18n="cta.nopitch">Pas d'argumentaire. Pas d'engagement. Juste de la clarté.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-left">
+        <a href="#" class="logo" id="footer-logo">JINXA</a>
+        <ul class="footer-links">
+          <li><a href="#services" data-i18n="footer.services">Services</a></li>
+          <li><a href="#case-studies" data-i18n="footer.cases">Cas clients</a></li>
+          <li><a href="#how-it-works" data-i18n="footer.process">Processus</a></li>
+        </ul>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:hello@jinxa.fr" class="footer-email">hello@jinxa.fr</a>
+        <a href="https://www.linkedin.com/in/leslie-guilbert-digital-marketing-strategy/" target="_blank" rel="noopener" class="footer-linkedin">LinkedIn</a>
+        <span class="footer-copy" data-i18n="footer.copy">&copy; 2025 Jinxa. Construit avec clarté et sans fioritures.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <script>
+    // ========== i18n ==========
+    var TRANSLATIONS = {
+      fr: {
+        'nav.about': 'À propos', 'nav.services': 'Services', 'nav.cases': 'Cas clients',
+        'nav.process': 'Processus', 'nav.contact': 'Contact', 'nav.cta': 'Réserver un appel',
+        'hero.badge': 'CRM · Automatisation · NoCode & IA',
+        'hero.badge_sub': 'Pour les équipes B2B en croissance',
+        'hero.h1': 'Transformez le chaos opérationnel en moteur de croissance.',
+        'hero.sub': '10+ ans à structurer des systèmes qui font vraiment avancer les équipes. CRM, automatisation, stratégie data — sans jargon, avec des résultats.',
+        'hero.stat1_label': 'clients', 'hero.stat1_ctx': 'dans 6 secteurs',
+        'hero.stat2_label': 'projets', 'hero.stat2_ctx': 'livrés de A à Z',
+        'hero.stat3_label': 'ans', 'hero.stat3_ctx': 'depuis 2014',
+        'hero.cta1': 'Réserver un appel gratuit', 'hero.cta2': 'Voir les cas clients',
+        'hero.testimonial_quote': '"Leslie a transformé notre CRM et toute notre gestion de données. Ce qui prenait des semaines à nos équipes tourne maintenant automatiquement."',
+        'hero.testimonial_attr': 'Antoine Bermejo — Directeur Marketing, Autorigin',
+        'ticker.years': '10+ ans de CRM & automatisation', 'ticker.projects': '65+ projets livrés',
+        'trust.header': "Ils m'ont fait confiance",
+        'trust.sub.michelin': 'Hospitalité & Gastronomie', 'trust.sub.autorigin': 'Automobile',
+        'trust.sub.lockdata': 'Cybersécurité', 'trust.sub.monaco': 'Marine & Nautisme',
+        'trust.tools': 'Outils utilisés pour construire des systèmes durables :',
+        'about.label': 'À propos',
+        'about.title': 'Leslie Guilbert —<br>Consultante en transformation digitale',
+        'about.p1': "Depuis 2014, j'accompagne des équipes B2B dans leur transformation digitale — de la stratégie jusqu'à l'exécution. Mon travail : mettre en place des systèmes CRM, des automatisations et des tableaux de bord qui font réellement avancer les équipes, sans complexité inutile.",
+        'about.p2': "Je travaille en direct avec les décideurs. Pas d'agence intermédiaire, pas de livrables creux — uniquement des résultats mesurables alignés avec vos objectifs business.",
+        'about.cred_years': "10+ ans d'expérience", 'about.cred_sectors': '6 secteurs',
+        'about.seg1.title': 'Équipes commerciales', 'about.seg1.desc': "CRM, pipelines, automatisation des relances — votre équipe vend, pas elle gère des outils.",
+        'about.seg2.title': 'Équipes marketing', 'about.seg2.desc': "Segmentation, nurturing, reporting — des campagnes pilotées par la data, pas l'intuition.",
+        'about.seg3.title': 'Dirigeants & fondateurs', 'about.seg3.desc': "Vision claire, systèmes solides, résultats traçables — pour piloter avec confiance.",
+        'cases.label': 'Résultats', 'cases.title': 'Des résultats concrets, tous secteurs',
+        'case.challenge': 'Défi', 'case.solution': 'Solution',
+        'cases.michelin.challenge': 'Fluidifier les processus internes et éliminer les inefficacités entre équipes.',
+        'cases.michelin.solution': 'Automatisation de la stack martech avec Make + HubSpot pour supprimer les transmissions manuelles.',
+        'cases.michelin.b1': '30% de flux accélérés', 'cases.michelin.b2': 'Zéro transfert manuel', 'cases.michelin.b3': '3 mois de déploiement',
+        'cases.michelin.n1': 'Plus rapide', 'cases.michelin.n2': 'Transferts manuels', 'cases.michelin.n3': 'Déploiement',
+        'cases.autorigin.challenge': "Aligner sales et marketing pour une meilleure acquisition dans l'industrie automobile.",
+        'cases.autorigin.solution': 'Implémentation CRM + système de gestion de données avec tableaux de bord temps réel.',
+        'cases.autorigin.b1': '2x conversion leads', 'cases.autorigin.b2': 'Sales & marketing alignés', 'cases.autorigin.b3': 'Tableaux de bord temps réel',
+        'cases.autorigin.n1': 'Conversion leads', 'cases.autorigin.n2': 'Aligné', 'cases.autorigin.n3': 'Tableaux',
+        'cases.lockdata.challenge': 'Construire des systèmes scalables et améliorer le suivi des performances en cybersécurité.',
+        'cases.lockdata.solution': "Workflows d'automatisation marketing + tableaux de bord analytics pour une visibilité totale.",
+        'cases.lockdata.b1': '50% de temps économisé', 'cases.lockdata.b2': 'Visibilité totale', 'cases.lockdata.b3': 'Opérations scalables',
+        'cases.lockdata.n1': 'Temps économisé', 'cases.lockdata.n2': 'Visibilité', 'cases.lockdata.n3': 'Opérations', 'cases.lockdata.n3_val': 'Scalable',
+        'how.label': 'Processus', 'how.title': 'Comment je vous aide à avancer',
+        'how.step1.num': 'Étape 1', 'how.step1.title': 'Diagnostic & Découverte',
+        'how.step1.desc': "On commence par un appel gratuit de 30 minutes. J'écoute vos défis, cartographie vos workflows actuels et identifie où l'automatisation et la data peuvent créer le plus d'impact.",
+        'how.step1.b1': 'Cartographie de vos outils & workflows actuels', 'how.step1.b2': "Identification des 3 principales opportunités d'automatisation", 'how.step1.b3': 'Audit qualité des données & santé CRM',
+        'how.step1.pill': '⏱ Gratuit. Sans engagement.',
+        'how.step2.num': 'Étape 2', 'how.step2.title': 'Feuille de route actionnable',
+        'how.step2.desc': "Je construis une stratégie data-driven adaptée à vos objectifs. Vous recevez une roadmap claire avec priorités, délais et résultats attendus avant tout démarrage.",
+        'how.step2.b1': 'Quick wins prioritaires + roadmap long terme', "how.step2.b2": "Sélection d'outils & architecture d'intégration", 'how.step2.b3': 'KPIs et métriques de succès définis',
+        'how.step2.pill': '📄 Transparence totale.',
+        'how.step3.num': 'Étape 3', 'how.step3.title': 'Construire, Tester, Lancer',
+        'how.step3.desc': "J'implémente les systèmes, intègre vos outils et forme vos équipes à leur utilisation. Vous bénéficiez d'un support continu pour assurer la scalabilité.",
+        'how.step3.b1': 'Design de scénarios, tests & déploiement', 'how.step3.b2': "Formation & sessions d'adoption des équipes", 'how.step3.b3': 'Transfert avec documentation complète',
+        'how.step3.pill': '🗓 Livré en 4–8 semaines.',
+        'services.label': 'Services', 'services.title': 'Ce que je fais le mieux',
+        'svc.strategy.title': 'Stratégie de Croissance', 'svc.strategy.desc': 'Des roadmaps actionnables et data-driven, alignées avec vos objectifs business.',
+        'svc.strategy.b1': "Roadmap d'acquisition basée sur la data", 'svc.strategy.b2': 'Optimisation du mix de canaux', 'svc.strategy.b3': 'Revues de performance mensuelles',
+        'svc.automation.title': 'Automatisation des Workflows', 'svc.automation.desc': 'Des systèmes intelligents avec Make, Zapier et APIs custom pour gagner du temps et scaler.',
+        'svc.automation.b1': 'Design de scénarios Make & Zapier', 'svc.automation.b2': 'Connecteurs API personnalisés', 'svc.automation.b3': "Systèmes d'alertes Slack/email",
+        'svc.crm.title': 'Implémentation CRM', 'svc.crm.desc': "Configuration et optimisation de HubSpot, Salesforce et Notion pour qu'ils soient vraiment utilisés.",
+        'svc.crm.b1': 'Setup HubSpot & Salesforce', 'svc.crm.b2': 'Migration & nettoyage des données', 'svc.crm.b3': 'Onboarding & formation des équipes',
+        'svc.analytics.title': 'Analytics & Tableaux de Bord', 'svc.analytics.desc': 'Des dashboards qui coupent le bruit et suivent ce qui compte vraiment.',
+        'svc.analytics.b1': 'Ateliers de définition des KPIs', 'svc.analytics.b2': 'Construction de dashboards sur mesure', 'svc.analytics.b3': 'Rapports automatisés hebdomadaires',
+        'svc.marketing.title': 'Marketing Performance', 'svc.marketing.desc': 'Planification et exécution de campagnes SEO, SEA et CRM pour un ROI mesurable.',
+        'svc.marketing.b1': 'Planification de campagnes cross-canal', 'svc.marketing.b2': 'Audit & optimisation SEO/SEA', 'svc.marketing.b3': 'Séquences email pilotées par CRM',
+        'svc.adoption.title': 'Adoption Digitale', 'svc.adoption.desc': "Déploiement de nouveaux outils et formation de vos équipes pour qu'ils les utilisent vraiment.",
+        'svc.adoption.b1': 'Planification du déploiement des outils', 'svc.adoption.b2': 'Sessions de formation des équipes', "svc.adoption.b3": "Suivi d'utilisation & itération",
+        'cta.title': 'Prêt à transformer vos opérations ?',
+        'cta.sub': "Réservez un appel stratégique gratuit de 30 minutes. Pas d'argumentaire commercial — juste une vraie conversation sur comment l'automatisation et la data peuvent débloquer votre croissance.",
+        'cta.whathappens': 'Ce qui se passe après votre réservation :',
+        'cta.step1': 'Appel découverte 30 min', 'cta.step2': 'Roadmap personnalisée sous 48h', 'cta.step3': 'Lancement du projet',
+        'cta.btn': 'Réserver votre appel gratuit', 'cta.nopitch': "Pas d'argumentaire. Pas d'engagement. Juste de la clarté.",
+        'footer.services': 'Services', 'footer.cases': 'Cas clients', 'footer.process': 'Processus',
+        'footer.copy': '© 2025 Jinxa. Construit avec clarté et sans fioritures.'
+      },
+      en: {
+        'nav.about': 'About', 'nav.services': 'Services', 'nav.cases': 'Case Studies',
+        'nav.process': 'Process', 'nav.contact': 'Contact', 'nav.cta': 'Book a Call',
+        'hero.badge': 'CRM · Automation · NoCode & AI',
+        'hero.badge_sub': 'For B2B companies & growing teams',
+        'hero.h1': 'Turn operational chaos into a growth engine.',
+        'hero.sub': '10+ years building systems that actually move teams forward. CRM, automation, data strategy — no jargon, real results.',
+        'hero.stat1_label': 'clients', 'hero.stat1_ctx': 'across 6 industries',
+        'hero.stat2_label': 'projects', 'hero.stat2_ctx': 'delivered end-to-end',
+        'hero.stat3_label': 'years', 'hero.stat3_ctx': 'since 2014',
+        'hero.cta1': 'Book a Free Strategy Call', 'hero.cta2': 'View Case Studies',
+        'hero.testimonial_quote': '"Leslie transformed our entire CRM & data setup. What took our team weeks now runs automatically."',
+        'hero.testimonial_attr': 'Antoine Bermejo — Marketing Director, Autorigin',
+        'ticker.years': '10+ years of CRM & automation', 'ticker.projects': '65+ projects delivered',
+        'trust.header': 'Trusted by teams at',
+        'trust.sub.michelin': 'Hospitality & Gastronomy', 'trust.sub.autorigin': 'Automotive',
+        'trust.sub.lockdata': 'Cybersecurity', 'trust.sub.monaco': 'Marine & Nautical',
+        'trust.tools': 'Tools I use to build systems that last:',
+        'about.label': 'About',
+        'about.title': 'Leslie Guilbert —<br>Digital Transformation Consultant',
+        'about.p1': "Since 2014, I've been helping B2B teams navigate digital transformation — from strategy to execution. My work: building CRM systems, automations, and dashboards that genuinely move teams forward, without unnecessary complexity.",
+        'about.p2': "I work directly with decision-makers. No agency middleman, no hollow deliverables — only measurable results aligned with your business goals.",
+        'about.cred_years': '10+ years experience', 'about.cred_sectors': '6 sectors',
+        'about.seg1.title': 'Sales teams', 'about.seg1.desc': "CRM, pipelines, automated follow-ups — your team sells, it doesn't manage tools.",
+        'about.seg2.title': 'Marketing teams', 'about.seg2.desc': 'Segmentation, nurturing, reporting — campaigns driven by data, not intuition.',
+        'about.seg3.title': 'Executives & founders', 'about.seg3.desc': 'Clear vision, solid systems, traceable results — to steer with confidence.',
+        'cases.label': 'Results', 'cases.title': 'Proven Results Across Industries',
+        'case.challenge': 'Challenge', 'case.solution': 'Solution',
+        'cases.michelin.challenge': 'Streamline internal processes & eliminate inefficiencies across teams.',
+        'cases.michelin.solution': 'Implemented martech stack automation using Make + HubSpot to eliminate manual handoffs.',
+        'cases.michelin.b1': '30% faster workflows', 'cases.michelin.b2': 'Zero manual handoffs', 'cases.michelin.b3': '3 months to full implementation',
+        'cases.michelin.n1': 'Faster', 'cases.michelin.n2': 'Manual handoffs', 'cases.michelin.n3': 'To deploy',
+        'cases.autorigin.challenge': 'Align sales and marketing for stronger acquisition in the automotive space.',
+        'cases.autorigin.solution': 'CRM implementation + data management system with real-time dashboards.',
+        'cases.autorigin.b1': '2x lead conversion', 'cases.autorigin.b2': 'Sales & marketing aligned', 'cases.autorigin.b3': 'Real-time dashboards',
+        'cases.autorigin.n1': 'Lead conversion', 'cases.autorigin.n2': 'Aligned', 'cases.autorigin.n3': 'Dashboards',
+        'cases.lockdata.challenge': 'Build scalable systems and improve performance tracking for data security.',
+        'cases.lockdata.solution': 'Marketing automation workflows + analytics dashboards for full visibility.',
+        'cases.lockdata.b1': '50% time saved', 'cases.lockdata.b2': 'Full visibility', 'cases.lockdata.b3': 'Scalable operations',
+        'cases.lockdata.n1': 'Time saved', 'cases.lockdata.n2': 'Visibility', 'cases.lockdata.n3': 'Operations', 'cases.lockdata.n3_val': 'Scalable',
+        'how.label': 'Process', 'how.title': 'How I Help You Grow',
+        'how.step1.num': 'Step 1', 'how.step1.title': 'Discovery & Diagnosis',
+        'how.step1.desc': 'We start with a free 30-minute call. I listen to your challenges, map your current workflows, and identify where automation and data can create the biggest impact.',
+        'how.step1.b1': 'Map your current workflows & tools', 'how.step1.b2': 'Identify top 3 automation opportunities', 'how.step1.b3': 'Assess data quality & CRM health',
+        'how.step1.pill': '⏱ Free. No commitment.',
+        'how.step2.num': 'Step 2', 'how.step2.title': 'Actionable Roadmap',
+        'how.step2.desc': 'I build a data-driven strategy tailored to your goals. You get a clear roadmap with priorities, timelines, and expected outcomes before we start implementation.',
+        'how.step2.b1': 'Prioritized quick wins + long-term roadmap', 'how.step2.b2': 'Tool selection & integration architecture', 'how.step2.b3': 'Clear KPIs and success metrics defined',
+        'how.step2.pill': '📄 Full transparency.',
+        'how.step3.num': 'Step 3', 'how.step3.title': 'Build, Test, Launch',
+        'how.step3.desc': 'I implement the systems, integrate your tools, and coach your team on how to use them. You get ongoing support to ensure everything scales as you grow.',
+        'how.step3.b1': 'Scenario design, testing & deployment', 'how.step3.b2': 'Team training & adoption sessions', 'how.step3.b3': 'Handover with full documentation',
+        'how.step3.pill': '🗓 Done in 4–8 weeks.',
+        'services.label': 'Services', 'services.title': 'What I Do Best',
+        'svc.strategy.title': 'Growth Strategy', 'svc.strategy.desc': 'Build actionable, data-driven roadmaps aligned with your business goals.',
+        'svc.strategy.b1': 'Data-driven acquisition roadmap', 'svc.strategy.b2': 'Channel mix optimization', 'svc.strategy.b3': 'Monthly performance reviews',
+        'svc.automation.title': 'Workflow Automation', 'svc.automation.desc': 'Design smart systems using Make, Zapier, and custom APIs to save time and scale.',
+        'svc.automation.b1': 'Make & Zapier scenario design', 'svc.automation.b2': 'Custom API connectors', 'svc.automation.b3': 'Slack/email alert systems',
+        'svc.crm.title': 'CRM Implementation', 'svc.crm.desc': 'Set up and optimize HubSpot, Salesforce, and Notion so they actually get used.',
+        'svc.crm.b1': 'HubSpot & Salesforce setup', 'svc.crm.b2': 'Data migration & cleanup', 'svc.crm.b3': 'Team onboarding & training',
+        'svc.analytics.title': 'Analytics & Dashboards', 'svc.analytics.desc': 'Build dashboards that cut through the noise and track what actually matters.',
+        'svc.analytics.b1': 'KPI definition workshops', 'svc.analytics.b2': 'Custom dashboard builds', 'svc.analytics.b3': 'Weekly automated reports',
+        'svc.marketing.title': 'Performance Marketing', 'svc.marketing.desc': 'Plan and execute campaigns across SEO, SEA, and CRM to drive measurable ROI.',
+        'svc.marketing.b1': 'Cross-channel campaign planning', 'svc.marketing.b2': 'SEO/SEA audit & optimization', 'svc.marketing.b3': 'CRM-driven email sequences',
+        'svc.adoption.title': 'Digital Adoption', 'svc.adoption.desc': 'Roll out new tools and coach your teams so they actually use them.',
+        'svc.adoption.b1': 'Tool rollout planning', 'svc.adoption.b2': 'Team training sessions', 'svc.adoption.b3': 'Usage tracking & iteration',
+        'cta.title': 'Ready to transform your operations?',
+        'cta.sub': 'Book a free 30-minute strategy call. No sales pitch — just a real conversation about where automation and data can unlock growth for your business.',
+        'cta.whathappens': 'What happens after you book:',
+        'cta.step1': '30-min discovery call', 'cta.step2': 'Custom roadmap in 48h', 'cta.step3': 'Project kickoff',
+        'cta.btn': 'Book Your Free Call', 'cta.nopitch': 'No sales pitch. No commitment. Just clarity.',
+        'footer.services': 'Services', 'footer.cases': 'Case Studies', 'footer.process': 'How it Works',
+        'footer.copy': '© 2025 Jinxa. Built with clarity and no BS.'
+      }
+    };
+
+    var currentLang = localStorage.getItem('jinxa_lang') || 'fr';
+
+    function applyLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      var btn = document.getElementById('lang-toggle');
+      if (btn) btn.textContent = lang === 'fr' ? 'EN' : 'FR';
+      var dict = TRANSLATIONS[lang];
+      if (!dict) return;
+      // data-i18n: update first text node, preserve child elements (SVGs, spans)
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var val = dict[el.getAttribute('data-i18n')];
+        if (val === undefined) return;
+        var nodes = el.childNodes;
+        for (var i = 0; i < nodes.length; i++) {
+          if (nodes[i].nodeType === 3 && nodes[i].textContent.trim() !== '') { nodes[i].textContent = val; return; }
+        }
+        el.textContent = val;
+      });
+      // data-i18n-html: replace full innerHTML
+      document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+        var val = dict[el.getAttribute('data-i18n-html')];
+        if (val !== undefined) el.innerHTML = val;
+      });
+      localStorage.setItem('jinxa_lang', lang);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      applyLang(currentLang);
+      var langBtn = document.getElementById('lang-toggle');
+      if (langBtn) langBtn.addEventListener('click', function() {
+        applyLang(currentLang === 'fr' ? 'en' : 'fr');
+      });
+
+      // --- Navbar scroll ---
+      var navbar = document.getElementById('navbar');
+
+      function onScroll() {
+        var y = window.scrollY || window.pageYOffset;
+        if (y > 40) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // --- Mobile menu ---
+      var menuToggle = document.getElementById('menu-toggle');
+      var navLinks = document.getElementById('nav-links');
+
+      menuToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('open');
+      });
+
+      navLinks.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          navLinks.classList.remove('open');
+        });
+      });
+
+      // --- Logo scroll to top ---
+      document.getElementById('logo-link').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      document.getElementById('footer-logo').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // --- Scroll reveal with stagger ---
+      var revealElements = document.querySelectorAll('.reveal');
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var parent = el.closest('.cases-grid, .services-grid, .timeline');
+            if (parent) {
+              var siblings = Array.from(parent.querySelectorAll('.reveal'));
+              var idx = siblings.indexOf(el);
+              el.style.transitionDelay = (idx * 120) + 'ms';
+            }
+            el.classList.add('visible');
+            revealObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      revealElements.forEach(function (el) {
+        revealObserver.observe(el);
+      });
+
+      // --- Counter animation ---
+      function animateCounter(el) {
+        var target = parseFloat(el.getAttribute('data-target'));
+        var prefix = el.getAttribute('data-prefix') || '';
+        var suffix = el.getAttribute('data-suffix') || '';
+        var duration = 1500;
+        var start = performance.now();
+
+        function step(now) {
+          var elapsed = now - start;
+          var progress = Math.min(elapsed / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = Math.round(eased * target);
+          el.textContent = prefix + current + suffix;
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      var counters = document.querySelectorAll('.hero-stat-number, .case-counter');
+      var counterObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      counters.forEach(function (c) {
+        counterObserver.observe(c);
+      });
+
+      // --- Parallax ---
+      var parallaxContainer = document.getElementById('parallax');
+      var parallaxElements = parallaxContainer ? parallaxContainer.querySelectorAll('.p-el') : [];
+      var ticking = false;
+
+      function updateParallax() {
+        var scrollY = window.scrollY || window.pageYOffset;
+        parallaxElements.forEach(function (el) {
+          var speed = parseFloat(el.getAttribute('data-speed')) || 0.03;
+          var yOffset = scrollY * speed * -60;
+          el.style.transform = 'translateY(' + yOffset + 'px)';
+        });
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      // --- Smooth scroll for anchor links ---
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          var href = this.getAttribute('href');
+          if (href === '#') return;
+          var target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            var offset = navbar.offsetHeight + 16;
+            var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
