@@ -22,9 +22,9 @@ from pathlib import Path
 
 # === CONFIGURATION ===
 
-# Map site names to their HTML files
+# Map site names to their HTML files (relative to PROJECT_ROOT)
 SITE_MAP = {
-    "jinxa": "index.html",
+    "jinxa": "jinxa.html",
     "automai": "automai.html",
 }
 
@@ -139,10 +139,8 @@ def prepare_deploy(site: str):
     """Prepare the deployment directory."""
     print(f"\n=== Preparing deployment for '{site}' ===\n")
 
-    # Create clean deploy directory
-    if DEPLOY_DIR.exists():
-        shutil.rmtree(DEPLOY_DIR)
-    DEPLOY_DIR.mkdir(parents=True)
+    # Ensure deploy directory exists (do NOT wipe — preserves manually-placed assets like image.png)
+    DEPLOY_DIR.mkdir(parents=True, exist_ok=True)
 
     # Copy HTML file as index.html
     src_file = PROJECT_ROOT / SITE_MAP[site]
@@ -150,17 +148,33 @@ def prepare_deploy(site: str):
     shutil.copy2(src_file, dst_file)
     print(f"  Copied: {src_file.name} -> {dst_file}")
 
-    # Create vercel.json for static site
+    # Copy any static assets from PROJECT_ROOT that don't have dedicated handling
+    # (e.g. image.png placed next to the HTML source)
+    for asset in PROJECT_ROOT.glob("*.png"):
+        shutil.copy2(asset, DEPLOY_DIR / asset.name)
+        print(f"  Copied asset: {asset.name}")
+    for asset in PROJECT_ROOT.glob("*.jpg"):
+        shutil.copy2(asset, DEPLOY_DIR / asset.name)
+        print(f"  Copied asset: {asset.name}")
+
+    # Create vercel.json — deploy all files and route unknown paths to index.html
+    # Build explicit static routes for every image copied to DEPLOY_DIR
+    asset_routes = []
+    for asset in DEPLOY_DIR.glob("*.png"):
+        asset_routes.append({"src": f"/{asset.name}", "dest": f"/{asset.name}"})
+    for asset in DEPLOY_DIR.glob("*.jpg"):
+        asset_routes.append({"src": f"/{asset.name}", "dest": f"/{asset.name}"})
+
     vercel_config = {
         "version": 2,
         "name": site,
         "builds": [
             {
-                "src": "index.html",
+                "src": "**",
                 "use": "@vercel/static"
             }
         ],
-        "routes": [
+        "routes": asset_routes + [
             {
                 "src": "/(.*)",
                 "dest": "/index.html"
@@ -204,8 +218,9 @@ def deploy(site: str, production: bool = False):
     try:
         result = run_cmd(cmd, capture=True)
 
-        # Extract URL from output
-        output_lines = result.stdout.strip().split("\n")
+        # Extract URL from output (check both stdout and stderr)
+        combined = (result.stdout or "") + "\n" + (result.stderr or "")
+        output_lines = combined.strip().split("\n")
         deploy_url = None
         for line in output_lines:
             if "http" in line:
