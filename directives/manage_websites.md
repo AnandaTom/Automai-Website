@@ -2,15 +2,30 @@
 
 ## Goal
 Manage the static website files in this repo. Currently two sites exist:
-- **Jinxa** (`index.html`) — Leslie Guilbert's digital transformation agency
+- **Jinxa** (`jinxa.html`) — Leslie Guilbert's B2B digital transformation consultancy
 - **Automai** (`automai.html`) — Tom Randeau's AI automation agency
 
 ## Site Registry
 
 | Site | File | Domain | Vercel Project | Status |
 |---|---|---|---|---|
-| Jinxa | `index.html` | TBD | TBD | Active |
+| Jinxa | `jinxa.html` | jinxa.vercel.app | jinxa | Active |
 | Automai | `automai.html` | TBD | TBD | Active |
+
+## Jinxa — Chatbot Integration
+
+Jinxa has a live chatbot widget (bottom-right floating bubble) backed by N8N.
+
+| Config | Value |
+|--------|-------|
+| N8N instance | `https://jinxa.app.n8n.cloud` |
+| Workflow ID | `MAbBdvHt-2k6zpqt43Or2` |
+| Webhook URL | `https://jinxa.app.n8n.cloud/webhook/91dc8835-b699-4ff9-81ff-df4e2018f52f/chat` |
+| Model | `gpt-4o-mini` |
+| Memory window | 10 exchanges |
+| Credentials key | `LESLIE_N8N_API_KEY` in `.env` |
+
+To update the chatbot system prompt or model parameters, use `directives/n8n_chatbot.md`.
 
 ## Workflow: Edit a Site
 
