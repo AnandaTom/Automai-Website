@@ -2601,22 +2601,31 @@
   <script>
     (function() {
       var WEBHOOK = 'https://jinxa.app.n8n.cloud/webhook/91dc8835-b699-4ff9-81ff-df4e2018f52f/chat';
-      var QR_FR = ['Automatiser un process', 'Améliorer mon CRM', 'Voir des cas clients', 'Prendre un RDV'];
-      var QR_EN = ['Automate a process', 'Improve my CRM', 'See case studies', 'Book a call'];
+      var MSGS_KEY = 'jinxa_chat_msgs';
 
-      var bubble   = document.getElementById('chat-bubble');
-      var win      = document.getElementById('chat-window');
-      var closeBtn = document.getElementById('chat-close');
-      var messages = document.getElementById('chat-messages');
-      var qrWrap   = document.getElementById('chat-quick-replies');
-      var input    = document.getElementById('chat-input');
-      var sendBtn  = document.getElementById('chat-send');
+      // Contextual quick replies — 3 stages, indexed by botMsgCount
+      var QR_FR = [
+        ['Automatiser un process', 'Améliorer mon CRM', 'Voir des cas clients', 'Prendre un RDV'],
+        ['On perd des leads', 'Processus trop lent', 'CRM sous-utilisé', 'Autre chose'],
+        ['Je suis décideur', 'Budget à définir', 'Prendre un RDV']
+      ];
+      var QR_EN = [
+        ['Automate a process', 'Improve my CRM', 'See case studies', 'Book a call'],
+        ['We lose leads', 'Processes too slow', 'CRM underused', 'Something else'],
+        ["I'm the decision-maker", 'Budget TBD', 'Book a call']
+      ];
+
+      var bubble    = document.getElementById('chat-bubble');
+      var win       = document.getElementById('chat-window');
+      var closeBtn  = document.getElementById('chat-close');
+      var messages  = document.getElementById('chat-messages');
+      var qrWrap    = document.getElementById('chat-quick-replies');
+      var input     = document.getElementById('chat-input');
+      var sendBtn   = document.getElementById('chat-send');
       var statusTxt = document.getElementById('chat-status-text');
 
-      var isOpen = false;
-      var isLoading = false;
+      var isOpen = false, isLoading = false, greeted = false, botMsgCount = 0;
       var sessionId = null;
-      var greeted = false;
 
       function getSessionId() {
         if (!sessionId) {
@@ -2629,20 +2638,47 @@
         return sessionId;
       }
 
-      function getLang() {
-        return (typeof currentLang !== 'undefined' ? currentLang : 'fr');
-      }
+      function getLang() { return (typeof currentLang !== 'undefined' ? currentLang : 'fr'); }
 
       function addMsg(text, role) {
         var div = document.createElement('div');
         div.className = 'chat-msg ' + role;
-        // Convert URLs to links
         div.innerHTML = text.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
         messages.appendChild(div);
         messages.scrollTop = messages.scrollHeight;
         return div;
       }
 
+      // ── Message persistence ──────────────────────────────────────────
+      function saveMessages() {
+        try {
+          var divs = messages.querySelectorAll('.chat-msg');
+          var msgs = [];
+          divs.forEach(function(d) {
+            msgs.push({ html: d.innerHTML, role: d.classList.contains('user') ? 'user' : 'bot' });
+          });
+          localStorage.setItem(MSGS_KEY, JSON.stringify(msgs));
+        } catch(e) {}
+      }
+
+      function restoreMessages() {
+        try {
+          var saved = localStorage.getItem(MSGS_KEY);
+          if (!saved) return false;
+          var msgs = JSON.parse(saved);
+          if (!msgs || !msgs.length) return false;
+          msgs.forEach(function(m) {
+            var div = document.createElement('div');
+            div.className = 'chat-msg ' + m.role;
+            div.innerHTML = m.html;
+            messages.appendChild(div);
+          });
+          messages.scrollTop = messages.scrollHeight;
+          return true;
+        } catch(e) { return false; }
+      }
+
+      // ── Typing indicator ─────────────────────────────────────────────
       function showTyping() {
         var t = document.createElement('div');
         t.className = 'chat-typing';
@@ -2657,19 +2693,49 @@
         if (t) t.remove();
       }
 
-      function renderQuickReplies() {
+      // ── Contextual quick replies (stage-aware) ───────────────────────
+      function renderContextualReplies() {
         qrWrap.innerHTML = '';
-        var opts = getLang() === 'en' ? QR_EN : QR_FR;
-        opts.forEach(function(label) {
+        var stages = getLang() === 'en' ? QR_EN : QR_FR;
+        var idx = Math.min(botMsgCount - 1, stages.length - 1);
+        if (idx < 0) return;
+        stages[idx].forEach(function(label) {
           var btn = document.createElement('button');
           btn.className = 'chat-qr';
           btn.textContent = label;
-          btn.onclick = function() {
-            qrWrap.innerHTML = '';
-            handleSend(label);
-          };
+          btn.onclick = function() { qrWrap.innerHTML = ''; handleSend(label); };
           qrWrap.appendChild(btn);
         });
+      }
+
+      // ── Core send ────────────────────────────────────────────────────
+      async function sendToBot(chatInput, showUserMsg) {
+        if (isLoading) return;
+        isLoading = true;
+        if (showUserMsg) { addMsg(chatInput, 'user'); saveMessages(); }
+        statusTxt.textContent = getLang() === 'en' ? '● Typing...' : '● En train d\'écrire…';
+        showTyping();
+        try {
+          var res = await fetch(WEBHOOK, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'sendMessage', chatInput: chatInput, sessionId: getSessionId() })
+          });
+          var data = await res.json();
+          hideTyping();
+          addMsg(data.output || (getLang() === 'en' ? 'Sorry, an error occurred.' : 'Désolé, une erreur s\'est produite.'), 'bot');
+          saveMessages();
+          botMsgCount++;
+          renderContextualReplies();
+        } catch(e) {
+          hideTyping();
+          addMsg(getLang() === 'en'
+            ? 'I\'m not available right now. Contact Leslie directly: hello@jinxa.fr'
+            : 'Désolé, je ne suis pas disponible. Contactez Leslie : hello@jinxa.fr', 'bot');
+          saveMessages();
+        }
+        isLoading = false;
+        statusTxt.textContent = getLang() === 'en' ? '● Online' : '● En ligne';
       }
 
       async function handleSend(text) {
@@ -2677,29 +2743,10 @@
         if (!text || isLoading) return;
         input.value = '';
         qrWrap.innerHTML = '';
-        addMsg(text, 'user');
-        isLoading = true;
-        statusTxt.textContent = '● En train d\'écrire…';
-        showTyping();
-
-        try {
-          var res = await fetch(WEBHOOK, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'sendMessage', chatInput: text, sessionId: getSessionId() })
-          });
-          var data = await res.json();
-          hideTyping();
-          addMsg(data.output || 'Désolé, une erreur s\'est produite.', 'bot');
-        } catch (e) {
-          hideTyping();
-          addMsg('Désolé, je ne suis pas disponible pour le moment. Contactez Leslie directement : hello@jinxa.fr', 'bot');
-        }
-
-        isLoading = false;
-        statusTxt.textContent = getLang() === 'en' ? '● Online' : '● En ligne';
+        await sendToBot(text, true);
       }
 
+      // ── Open / Close ─────────────────────────────────────────────────
       function openChat() {
         win.style.display = 'flex';
         win.style.flexDirection = 'column';
@@ -2707,55 +2754,42 @@
         document.getElementById('chat-bubble-pulse').style.display = 'none';
         if (!greeted) {
           greeted = true;
-          handleSend('__greet__');
+          var hasHistory = restoreMessages();
+          if (hasHistory) {
+            botMsgCount = messages.querySelectorAll('.chat-msg.bot').length;
+            renderContextualReplies();
+          } else {
+            sendToBot('Bonjour', false);
+          }
         }
         setTimeout(function() { input.focus(); }, 100);
       }
 
-      // Override handleSend to suppress greet message display
-      var _origHandleSend = handleSend;
-      handleSend = async function(text) {
-        var isGreet = text === '__greet__';
-        if (isGreet) {
-          isLoading = true;
-          statusTxt.textContent = '● En train d\'écrire…';
-          showTyping();
-          try {
-            var res = await fetch(WEBHOOK, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ action: 'sendMessage', chatInput: 'Bonjour', sessionId: getSessionId() })
-            });
-            var data = await res.json();
-            hideTyping();
-            addMsg(data.output || 'Bonjour ! Comment puis-je vous aider ?', 'bot');
-            renderQuickReplies();
-          } catch(e) {
-            hideTyping();
-            var greetFallback = getLang() === 'en'
-              ? 'Hi! I\'m the Jinxa assistant. How can I help you today?'
-              : 'Bonjour ! Je suis l\'assistant Jinxa. Comment puis-je vous aider aujourd\'hui ?';
-            addMsg(greetFallback, 'bot');
-            renderQuickReplies();
-          }
-          isLoading = false;
-          statusTxt.textContent = getLang() === 'en' ? '● Online' : '● En ligne';
-          return;
-        }
-        await _origHandleSend(text);
-      };
+      function closeChat() { win.style.display = 'none'; isOpen = false; }
 
-      function closeChat() {
-        win.style.display = 'none';
-        isOpen = false;
-      }
-
+      // ── Events ───────────────────────────────────────────────────────
       bubble.addEventListener('click', function() { isOpen ? closeChat() : openChat(); });
       closeBtn.addEventListener('click', closeChat);
       sendBtn.addEventListener('click', function() { handleSend(); });
       input.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
       });
+
+      // ── Auto-open: 30s timer OR 70% scroll, once per browser session ─
+      if (!sessionStorage.getItem('jinxa_auto_chat')) {
+        var autoOpened = false;
+        function triggerAutoOpen() {
+          if (autoOpened || isOpen) return;
+          autoOpened = true;
+          sessionStorage.setItem('jinxa_auto_chat', '1');
+          openChat();
+        }
+        setTimeout(triggerAutoOpen, 30000);
+        window.addEventListener('scroll', function onScroll() {
+          var pct = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
+          if (pct >= 0.7) { triggerAutoOpen(); window.removeEventListener('scroll', onScroll); }
+        }, { passive: true });
+      }
     })();
   </script>
 </body>
