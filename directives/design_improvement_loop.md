@@ -1,7 +1,7 @@
 # Design Improvement Loop
 
 ## Goal
-Iteratively improve the Jinxa website (`index.html`) with visual verification at each step. Use automated screenshots to catch regressions and validate improvements before deploying.
+Iteratively improve the Jinxa website (`jinxa.html`) with visual verification at each step. Use automated screenshots to catch regressions and validate improvements before deploying.
 
 ## Workflow
 
@@ -20,7 +20,7 @@ This captures 6 viewport-specific screenshots into `.tmp/screenshots/before/`:
 - `services.png` — services grid
 - `cta.png` — final CTA section
 
-### Step 2: Edit `index.html`
+### Step 2: Edit `jinxa.html`
 Make design changes per the improvement checklist (see below).
 
 ### Step 3: Capture After State
@@ -119,7 +119,7 @@ pip install pixelmatch Pillow
 
 **Screenshots are blurry or colors are off:**
 - Playwright may be using system fonts. Add `font-family` fallbacks to CSS.
-- Ensure `localhost:8082` is serving the correct `index.html` file.
+- Ensure `localhost:8082` is serving the correct `jinxa.html` file.
 
 **Diff shows hundreds of pixels changed when you only changed text:**
 - Anti-aliasing or font rendering differences between runs. This is expected.
@@ -135,7 +135,7 @@ pip install pixelmatch Pillow
 
 | File | Role |
 |---|---|
-| `index.html` | Site being improved |
+| `jinxa.html` | Site being improved |
 | `execution/screenshot_loop.py` | Automation script (serves locally, captures, diffs) |
 | `.tmp/screenshots/before/` | Baseline screenshots |
 | `.tmp/screenshots/after/` | Modified screenshots |
