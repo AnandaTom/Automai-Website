@@ -252,47 +252,49 @@ GUIDE_HTML = """<!DOCTYPE html>
   <div class="confidential">Document confidentiel · Jinxa</div>
 </div>
 
-<p>Ce guide vous explique comment héberger votre site sur votre propre compte, le modifier en autonomie, et le rendre accessible sur <b>jinxa.fr</b>. Tout est conçu pour que vous puissiez le faire sans aide technique.</p>
+<p>Ce guide vous explique comment héberger votre site sur votre propre compte, le modifier en autonomie, et le rendre accessible sur <b>jinxa.fr</b>. Tout est conçu pour que vous puissiez le faire <b>sans commandes techniques</b>.</p>
+
+<div class="tip-box" style="margin-top:20px; border-color:#16a34a; background:#f0fdf4;">
+  <strong>La règle d'or de ce guide :</strong> Pour toute manipulation technique (déploiement, configuration, modification du code), vous n'avez pas besoin de taper des commandes. Il vous suffit d'ouvrir <b>Claude Code dans VS Code</b> et de décrire ce que vous voulez en français. Claude s'occupe du reste.
+</div>
 
 
 <!-- ══════════ PARTIE 0 ══════════ -->
 <div class="section">
   <div class="section-label">Partie 0</div>
-  <h2>Récupérer le code du site</h2>
+  <h2>Installer les outils &amp; récupérer le code</h2>
   <div class="section-subtitle">À faire une seule fois — avant tout le reste.</div>
 
   <div class="subsection">
     <h3>Ce que Tom fait de son côté</h3>
     <ol>
       <li><div class="step-content">Sur <a href="https://github.com" target="_blank">github.com</a>, créer un nouveau dépôt <b>privé</b> nommé <code>jinxa-website</code> → cliquer <b>Create repository</b></div></li>
-      <li><div class="step-content">Dans le terminal du projet, pousser le code :
-        <pre><span class="green">git</span> remote add origin https://github.com/<span class="yellow">[son-username]</span>/jinxa-website.git
-<span class="green">git</span> push -u origin main</pre>
-      </div></li>
+      <li><div class="step-content">Pousser le code depuis son projet (une commande dans son terminal)</div></li>
       <li><div class="step-content">Vous inviter comme collaboratrice : <b>Settings → Collaborators → Add people</b> → votre adresse email GitHub</div></li>
     </ol>
     <div class="note">Une fois invitée, vous recevez un email de GitHub. Acceptez l'invitation pour accéder au projet.</div>
   </div>
 
   <div class="subsection">
-    <h3>Ce que vous installez (une seule fois)</h3>
+    <h3>Ce que vous faites (une seule fois)</h3>
     <ol>
       <li><div class="step-content">Créer un compte sur <a href="https://github.com" target="_blank">github.com</a> si vous n'en avez pas</div></li>
-      <li><div class="step-content">Installer <a href="https://git-scm.com/downloads" target="_blank">Git</a> (Windows) — laisser toutes les options par défaut</div></li>
+      <li><div class="step-content">Dans VS Code, ouvrir le panneau <b>Extensions</b> (icône puzzle dans la barre gauche, ou <b>Ctrl+Shift+X</b>) → rechercher <b>"Claude Code"</b> → cliquer <b>Install</b>
+        <div class="note" style="margin-top:8px;">Une icône Claude apparaît dans la barre latérale gauche. Cliquez dessus et connectez-vous avec votre compte Anthropic.</div>
+      </div></li>
+      <li><div class="step-content">Installer <a href="https://git-scm.com/downloads" target="_blank">Git</a> (Windows) — laisser toutes les options par défaut. Git permet à VS Code de télécharger le projet.</div></li>
       <li><div class="step-content">Installer <a href="https://nodejs.org/" target="_blank">Node.js</a> (version LTS) — laisser toutes les options par défaut</div></li>
       <li><div class="step-content">Installer <a href="https://python.org/downloads/" target="_blank">Python 3</a> — <b>cocher impérativement "Add Python to PATH"</b> lors de l'installation</div></li>
-      <li><div class="step-content">Ouvrir le terminal Windows (touche Windows → taper "cmd" → Entrée) et cloner le projet :
-        <pre><span class="green">git</span> clone https://github.com/<span class="yellow">[username-tom]</span>/jinxa-website.git
-<span class="green">cd</span> jinxa-website</pre>
-        → Un dossier <code>jinxa-website</code> apparaît sur votre ordinateur
+      <li><div class="step-content">Cloner le projet <b>sans toucher au terminal</b> : dans VS Code, ouvrir la palette de commandes (<b>Ctrl+Shift+P</b>) → taper <b>Git: Clone</b> → Entrée → coller l'URL GitHub fournie par Tom → choisir un dossier sur votre ordinateur → cliquer <b>Open</b>
+        <div class="note" style="margin-top:8px;">VS Code ouvre automatiquement le dossier <code>jinxa-website</code>. Vous voyez les fichiers dans l'explorateur à gauche.</div>
       </div></li>
-      <li><div class="step-content">Dans VS Code, créer un fichier <code>.env</code> à la racine du dossier avec ce contenu :
-        <pre>VERCEL_TOKEN=<span class="comment">← à remplir à l'étape suivante</span>
+      <li><div class="step-content">Dans VS Code, créer un nouveau fichier nommé <code>.env</code> à la racine du projet (clic droit dans l'explorateur → <b>New File</b>) et coller le contenu suivant, complété avec les clés que Tom vous a transmises :
+        <pre>VERCEL_TOKEN=<span class="comment">← votre token Vercel (créé à la Partie 1)</span>
 LESLIE_N8N_URL=https://jinxa.app.n8n.cloud
 LESLIE_N8N_API_KEY=<span class="comment">← clé N8N fournie par Tom</span></pre>
       </div></li>
     </ol>
-    <div class="warning">Le fichier <code>.env</code> contient vos clés privées. Il n'est jamais envoyé sur GitHub — c'est intentionnel. Ne le partagez pas.</div>
+    <div class="warning">Le fichier <code>.env</code> contient vos clés privées. Il n'est <b>jamais</b> envoyé sur GitHub — c'est intentionnel et automatique. Ne le partagez pas.</div>
   </div>
 </div>
 
@@ -305,18 +307,11 @@ LESLIE_N8N_API_KEY=<span class="comment">← clé N8N fournie par Tom</span></pr
 
   <ol>
     <li><div class="step-content">Créer un compte gratuit sur <a href="https://vercel.com" target="_blank">vercel.com</a> (avec votre email ou votre compte GitHub)</div></li>
-    <li><div class="step-content">Aller dans <b>Account Settings → Tokens → Create Token</b> → nommer le token <code>Jinxa</code> → cliquer <b>Create</b> → <b>copier le token affiché</b> (il ne sera visible qu'une seule fois)</div></li>
-    <li><div class="step-content">Dans VS Code, ouvrir le fichier <code>.env</code> et coller votre token :
-        <pre>VERCEL_TOKEN=<span class="yellow">votre-token-ici</span></pre>
-    </div></li>
-    <li><div class="step-content">Ouvrir le terminal intégré de VS Code (<b>Ctrl + `</b>) et vérifier que tout est en ordre :
-        <pre><span class="green">python</span> execution/setup_vercel.py</pre>
-        → Le script vérifie Node.js, installe le CLI Vercel si nécessaire, et confirme votre token
-    </div></li>
-    <li><div class="step-content">Déployer votre site pour la première fois :
-        <pre><span class="green">python</span> execution/deploy_vercel.py --deploy --site jinxa --production</pre>
-        → Vercel crée automatiquement un projet <code>jinxa</code> dans votre compte<br>
-        → L'URL de votre site s'affiche dans le terminal (ex. <code>https://jinxa.vercel.app</code>)
+    <li><div class="step-content">Aller dans <b>Account Settings → Tokens → Create Token</b> → nommer le token <code>Jinxa</code> → cliquer <b>Create</b> → <b>copier le token affiché</b> (il ne sera visible qu'une seule fois) → le coller dans votre fichier <code>.env</code> à la ligne <code>VERCEL_TOKEN=</code></div></li>
+    <li><div class="step-content">Ouvrir <b>Claude Code</b> dans VS Code (icône Claude dans la barre latérale gauche) et envoyer ce message :
+      <div class="tip-box" style="margin-top:8px; font-style:italic;">"J'ai créé mon compte Vercel et ajouté mon token dans le fichier .env. Configure le projet et déploie mon site pour la première fois."</div>
+      → Claude vérifie la configuration, installe ce qui manque et déploie automatiquement<br>
+      → L'URL de votre site s'affiche dans le chat (ex. <code>https://jinxa.vercel.app</code>)
     </div></li>
   </ol>
 
@@ -332,21 +327,20 @@ LESLIE_N8N_API_KEY=<span class="comment">← clé N8N fournie par Tom</span></pr
 
   <ol>
     <li><div class="step-content">Ouvrir VS Code dans le dossier <code>jinxa-website</code></div></li>
-    <li><div class="step-content">Ouvrir le terminal intégré : <b>Ctrl + `</b> (la touche avec l'accent grave, à gauche du 1)</div></li>
-    <li><div class="step-content">Taper <code>claude</code> pour lancer Claude Code, puis Entrée</div></li>
-    <li><div class="step-content">Décrire votre modification en langage naturel. Exemples :
+    <li><div class="step-content">Cliquer l'<b>icône Claude Code</b> dans la barre latérale gauche — le panneau de chat s'ouvre</div></li>
+    <li><div class="step-content">Décrire votre modification en français. Exemples :
       <ul class="plain">
         <li>"<i>Change le titre principal en : Votre nouvelle transformation digitale</i>"</li>
         <li>"<i>Mets à jour le lien Calendly avec cette URL : calendly.com/jinxa/new-link</i>"</li>
         <li>"<i>Dans la section cas clients, mets à jour les résultats de Guide Michelin : +40% au lieu de +30%</i>"</li>
         <li>"<i>Ajoute un nouveau service appelé 'Formation équipe' avec cette description : ...</i>"</li>
-        <li>"<i>Mets à jour le system prompt du chatbot pour inclure le nouveau service</i>"</li>
+        <li>"<i>Mets à jour le chatbot pour inclure le nouveau service Formation équipe</i>"</li>
       </ul>
     </div></li>
-    <li><div class="step-content">Claude modifie le fichier <code>jinxa.html</code> automatiquement. Vérifier le résultat en ouvrant le fichier dans votre navigateur (double-cliquer sur <code>jinxa.html</code>)</div></li>
-    <li><div class="step-content">Si le résultat vous convient, déployer :
-        <pre><span class="green">python</span> execution/deploy_vercel.py --deploy --site jinxa --production</pre>
-        → Le site est mis à jour en ligne en ~30 secondes
+    <li><div class="step-content">Claude modifie le fichier <code>jinxa.html</code> automatiquement. Vérifier le résultat en ouvrant le fichier dans votre navigateur (double-cliquer sur <code>jinxa.html</code> dans l'explorateur VS Code)</div></li>
+    <li><div class="step-content">Si le résultat vous convient, demander à Claude Code :
+      <div class="tip-box" style="margin-top:8px; font-style:italic;">"Déploie le site en production."</div>
+      → Le site est mis à jour en ligne en ~30 secondes
     </div></li>
   </ol>
 
@@ -355,7 +349,7 @@ LESLIE_N8N_API_KEY=<span class="comment">← clé N8N fournie par Tom</span></pr
   </div>
 
   <div class="tip-box">
-    <strong>Pour le chatbot :</strong> Si vous souhaitez modifier le comportement du chatbot (ajouter un service, mettre à jour les résultats clients, changer le ton), dites simplement à Claude : <i>"Mets à jour le system prompt du chatbot pour..."</i> — il se charge de la modification directement dans N8N.
+    <strong>Pour le chatbot :</strong> Si vous voulez modifier le comportement du chatbot (nouveau service, nouveaux résultats clients, ton différent), dites à Claude : <i>"Mets à jour le chatbot pour..."</i> — il se charge de la modification directement dans N8N, sans aucune manipulation de votre part.
   </div>
 </div>
 
