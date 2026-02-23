@@ -423,6 +423,26 @@ LESLIE_N8N_API_KEY=<span class="comment">← clé N8N fournie par Tom</span></pr
 """
 
 
+def export_pdf(html_path: Path) -> Path:
+    """Render HTML to PDF using Playwright (already installed for screenshots)."""
+    from playwright.sync_api import sync_playwright
+
+    pdf_path = html_path.with_suffix(".pdf")
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page()
+        page.goto(html_path.as_uri())
+        page.wait_for_load_state("networkidle")
+        page.pdf(
+            path=str(pdf_path),
+            format="A4",
+            margin={"top": "20mm", "bottom": "20mm", "left": "18mm", "right": "18mm"},
+            print_background=True,
+        )
+        browser.close()
+    return pdf_path
+
+
 def main():
     output_dir = OUTPUT_FILE.parent
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -433,13 +453,15 @@ def main():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(html)
 
-    print(f"Guide generated: {OUTPUT_FILE}")
+    print(f"HTML generated: {OUTPUT_FILE}")
+
+    print("Generating PDF...")
+    pdf_path = export_pdf(OUTPUT_FILE)
+    print(f"PDF generated:  {pdf_path} ({pdf_path.stat().st_size / 1024:.0f} KB)")
+
     print()
-    print("Next steps:")
-    print("  1. Open .tmp/leslie_guide.html in Chrome")
-    print("  2. Ctrl+A + Ctrl+C (select all + copy)")
-    print("  3. Open a blank Google Doc, Ctrl+V (paste)")
-    print("  4. Adjust heading styles if needed, then share with Leslie")
+    print("Share with Leslie:")
+    print(f"  {pdf_path}")
 
 
 if __name__ == "__main__":
